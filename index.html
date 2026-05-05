@@ -89,11 +89,6 @@
                         </div>
                     </div>
                 </section>
-                <section class="py-20 bg-slate-50 px-6 text-center">
-                    <h2 class="text-5xl font-black text-[#1d3557] mb-10 uppercase italic tracking-tighter">What People Say</h2>
-                    <p class="text-gray-400 italic">No reviews yet. Be the first to share your experience!</p>
-                    <button onclick="navigateTo('reviews')" class="mt-8 text-[#7fb3e6] font-bold uppercase tracking-widest text-xs hover:underline">Write a Review →</button>
-                </section>
             `,
             events: () => `
                 <section class="starry-bg text-white py-24 text-center relative overflow-hidden view-transition">
@@ -141,15 +136,14 @@
                         <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun. It was a privilege to see the immediate difference a warm meal makes, providing both nourishment and a sense of community to everyone who visited the truck.</p>
                         <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJF). While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
                         <p>We would like to extend a heartfelt thank you to the SLJ Foundation for their incredible partnership and for the use of their innovative mobile kitchen.</p>
+                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
                         
-                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12 mb-16">Love, <br>nova.</div>
-
-                        <!-- FOOD DRIVE GALLERY -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-                             <div class="img-container aspect-[3/4]"><img src="assets/images/food_gallery1.jpeg"></div>
-                             <div class="img-container aspect-[3/4]"><img src="assets/images/food_gallery2.jpeg"></div>
-                             <div class="img-container aspect-[3/4] md:col-span-1"><img src="assets/images/food_gallery3.jpeg"></div>
-                             <div class="img-container aspect-[3/4] md:col-span-1"><video controls class="h-full w-full object-cover"><source src="assets/videos/food_video.mp4"></video></div>
+                        <!-- NEW FOOD DRIVE ASSETS -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
+                            <div class="img-container aspect-[3/4]"><img src="assets/images/f1.jpeg"></div>
+                            <div class="img-container aspect-[3/4]"><img src="assets/images/f2.jpeg"></div>
+                            <div class="img-container aspect-[3/4]"><img src="assets/images/f3.jpg"></div>
+                            <div class="img-container aspect-[3/4]"><video controls loop muted class="w-full h-full object-cover"><source src="assets/videos/f4.mp4"></video></div>
                         </div>
                     </div>
                 </div>
@@ -171,14 +165,13 @@
                         <p>There's something so special about books, we all have a favorite childhood memory linked to a book, whether it's fiction or a comic. Sadly, not every child gets the chance to experience that joy and make memories with pages. That's why Team Nova hosted our very first Book Drive. We collected donations from 29th September to 1st October 2025.</p>
                         <p>We're collecting storybooks and exercise books to pass on to kids who need them. If you've got a few lying around, we'd love for you to be part of this.</p>
                         <p>Grateful for every heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
-                        
-                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12 mb-16">Love, <br>nova.</div>
+                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
 
-                        <!-- BOOK DRIVE GALLERY -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-                             <div class="img-container aspect-video md:col-span-2"><video controls class="h-full w-full object-cover"><source src="assets/videos/book_video.mp4"></video></div>
-                             <div class="img-container aspect-square"><img src="assets/images/book_gallery1.jpeg"></div>
-                             <div class="img-container aspect-square"><img src="assets/images/book_gallery2.jpeg"></div>
+                        <!-- NEW BOOK DRIVE ASSETS -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
+                            <div class="img-container aspect-[4/3]"><img src="assets/images/b1.jpg"></div>
+                            <div class="img-container aspect-[4/3]"><img src="assets/images/b3.jpg"></div>
+                            <div class="img-container md:col-span-2 aspect-video"><video controls loop muted class="w-full h-full object-cover"><source src="assets/videos/b2.mp4"></video></div>
                         </div>
                     </div>
                 </div>
@@ -214,11 +207,11 @@
                 </div>
             `,
             reviews: () => `
-                <div class="max-w-4xl mx-auto py-24 px-6 view-transition">
-                    <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase italic text-center">WRITE A REVIEW</h2>
-                    <div class="glass-card p-10 rounded-[3rem] shadow-xl">
-                        <form onsubmit="event.preventDefault(); alert('Thank you for your time!'); navigateTo('home');">
-                            <div class="flex flex-col items-center mb-8">
+                <div class="max-w-4xl mx-auto py-24 px-6 view-transition text-center">
+                    <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase italic">WRITE A REVIEW</h2>
+                    <div class="glass-card p-10 rounded-[3rem] shadow-xl text-left">
+                        <form onsubmit="event.preventDefault(); alert('Thank you for your review!'); navigateTo('home');">
+                            <div class="flex justify-center mb-8">
                                 <div class="star-rating">
                                     <input type="radio" id="star5" name="rating" value="5"/><label for="star5">★</label>
                                     <input type="radio" id="star4" name="rating" value="4"/><label for="star4">★</label>
@@ -227,14 +220,19 @@
                                     <input type="radio" id="star1" name="rating" value="1"/><label for="star1">★</label>
                                 </div>
                             </div>
-                            <div class="space-y-6 text-left">
-                                <div><label class="block text-sm font-bold mb-2">Display Name</label>
-                                <div class="flex gap-4 mb-3">
-                                    <label class="flex items-center text-sm cursor-pointer"><input type="radio" name="id" checked onclick="document.getElementById('ni').disabled=0" class="mr-2"> Name</label>
-                                    <label class="flex items-center text-sm cursor-pointer"><input type="radio" name="id" onclick="document.getElementById('ni').disabled=1;document.getElementById('ni').value=''" class="mr-2"> Anonymous</label>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-bold mb-2">Display Name</label>
+                                    <div class="flex gap-4 mb-3">
+                                        <label class="flex items-center text-sm cursor-pointer"><input type="radio" name="id" checked onclick="document.getElementById('ni').disabled=0" class="mr-2"> Name</label>
+                                        <label class="flex items-center text-sm cursor-pointer"><input type="radio" name="id" onclick="document.getElementById('ni').disabled=1;document.getElementById('ni').value=''" class="mr-2"> Anonymous</label>
+                                    </div>
+                                    <input type="text" id="ni" placeholder="Your Name" class="w-full p-4 rounded-2xl border border-gray-200 focus:outline-[#7fb3e6]">
                                 </div>
-                                <input type="text" id="ni" placeholder="Your Name" class="w-full p-4 rounded-2xl border border-gray-200"></div>
-                                <div><label class="block text-sm font-bold mb-2">Comment</label><textarea class="w-full p-4 rounded-2xl border border-gray-200 h-32" required placeholder="Share your experience..."></textarea></div>
+                                <div>
+                                    <label class="block text-sm font-bold mb-2">Comment</label>
+                                    <textarea class="w-full p-4 rounded-2xl border border-gray-200 h-32 focus:outline-[#7fb3e6]" required placeholder="Share your experience..."></textarea>
+                                </div>
                                 <button type="submit" class="w-full bg-[#1d3557] text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all">Post Review</button>
                             </div>
                         </form>
