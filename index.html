@@ -22,11 +22,9 @@
         #zoom-wrapper {
             transform: scale(0.90);
             transform-origin: top center;
-            width: 111.11%; 
-            margin-left: -5.55%; 
+            width: 111.11%; /* 1 / 0.90 to fill the width perfectly */
+            margin-left: -5.55%; /* Centering the scaled content */
             min-height: 111.11vh;
-            display: flex;
-            flex-direction: column;
         }
 
         body { font-family: 'Inter', sans-serif; color: var(--nova-navy); scroll-behavior: smooth; }
@@ -57,7 +55,6 @@
 <body>
 
 <div id="zoom-wrapper">
-    <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-24 flex items-center justify-between px-10">
         <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
             <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
@@ -66,6 +63,7 @@
             <span class="ml-4 font-black text-[#1d3557] italic tracking-tighter text-2xl uppercase">Team NOVA</span>
         </div>
         
+        <!-- TASKBAR TEXT: Increased to text-[18px] to counter the zoom-out -->
         <div class="hidden lg:flex space-x-12 text-[18px] font-bold uppercase tracking-[0.15em]">
             <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Home</button>
             <button onclick="navigateTo('events')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Events</button>
@@ -84,15 +82,7 @@
         </div>
     </nav>
 
-    <main id="app-content" class="pt-24 flex-grow min-h-screen"></main>
-
-    <!-- Footer / End Line -->
-    <footer class="w-full py-10 bg-slate-50 border-t border-gray-100 text-center">
-        <p class="text-gray-400 font-bold uppercase tracking-widest text-[13px]">
-            Need help? Contact us at 
-            <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] hover:underline ml-1">@nova_.ngo</a>
-        </p>
-    </footer>
+    <main id="app-content" class="pt-24 min-h-screen"></main>
 </div>
 
 <script>
