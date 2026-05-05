@@ -10,7 +10,6 @@
     <style>
         :root { --nova-navy: #1d3557; --nova-sky: #7fb3e6; --nova-white: #ffffff; }
         
-        /* Fixed 85% Zoom Logic */
         html, body { 
             background-color: var(--nova-white); 
             margin: 0; 
@@ -22,9 +21,11 @@
         #zoom-wrapper {
             transform: scale(0.85);
             transform-origin: top center;
-            width: 117.65%; /* Corresponds to 1/0.85 to fill the width */
-            margin-left: -8.825%; /* Centers the scaled-up width */
+            width: 117.65%; 
+            margin-left: -8.825%; 
             min-height: 117.65vh;
+            display: flex;
+            flex-direction: column;
         }
 
         body { font-family: 'Inter', sans-serif; color: var(--nova-navy); scroll-behavior: smooth; }
@@ -38,8 +39,9 @@
         .img-container { border-radius: 2.5rem; overflow: hidden; box-shadow: 0 15px 35px rgba(29, 53, 87, 0.15); background-color: #000; display: flex; align-items: center; justify-content: center; }
         .img-container img { width: 100%; height: 100%; display: block; object-fit: cover; }
         
-        .video-wrapper { max-width: 400px; width: 100%; margin: 0 auto; }
-        video { border-radius: 2rem; width: 100%; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: block; }
+        /* Smaller Video Sizing - No Cropping */
+        .video-wrapper { max-width: 280px; width: 100%; margin: 0 auto; }
+        video { border-radius: 1.5rem; width: 100%; height: auto; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: block; object-fit: contain; }
         
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(29, 53, 87, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .qr-frame { max-width: 260px; margin: 0 auto; border: 10px solid white; border-radius: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white; overflow: hidden; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
@@ -50,12 +52,20 @@
         .star-rating input { display: none; }
         .star-rating label { color: #ccc; cursor: pointer; font-size: 35px; transition: 0.2s; }
         .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #f59e0b; }
+
+        .review-float {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
     </style>
 </head>
 <body>
 
 <div id="zoom-wrapper">
-    <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-24 flex items-center justify-between px-10">
         <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
             <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
@@ -63,7 +73,6 @@
             </div>
             <span class="ml-4 font-black text-[#1d3557] italic tracking-tighter text-2xl uppercase">Team NOVA</span>
         </div>
-        <!-- TASKBAR TEXT: Increased to text-[16px] (approx 1rem) so it survives the 85% shrink -->
         <div class="hidden lg:flex space-x-12 text-[16px] font-bold uppercase tracking-[0.15em]">
             <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Home</button>
             <button onclick="navigateTo('events')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Events</button>
@@ -73,15 +82,20 @@
         <button class="lg:hidden text-[#1d3557]" onclick="toggleMobileMenu()">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
-        <div id="mobile-menu" class="hidden absolute top-24 left-0 w-full bg-white border-b border-gray-100 p-8 flex flex-col space-y-6 lg:hidden shadow-lg">
-            <button onclick="navigateTo('home')" class="text-left font-bold text-lg uppercase">Home</button>
-            <button onclick="navigateTo('events')" class="text-left font-bold text-lg uppercase">Events</button>
-            <button onclick="navigateTo('reviews')" class="text-left font-bold text-lg uppercase">Write Review</button>
-            <button onclick="navigateTo('contact')" class="text-left font-bold text-lg uppercase text-[#7fb3e6]">Connect</button>
-        </div>
     </nav>
 
-    <main id="app-content" class="pt-24 min-h-screen"></main>
+    <main id="app-content" class="pt-24 flex-grow"></main>
+
+    <footer class="w-full py-16 bg-white border-t border-gray-100 text-center px-6">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-gray-500 font-medium text-lg leading-relaxed">
+                Need help? Contact us at 
+                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-bold hover:underline">@nova_.ngo</a> 
+                for queries, collaborations or donations. <br>
+                <span class="text-[#1d3557] font-black uppercase tracking-widest text-sm mt-4 inline-block">Thank you.</span>
+            </p>
+        </div>
+    </footer>
 </div>
 
     <script>
@@ -98,6 +112,20 @@
                         </div>
                     </div>
                 </section>
+
+                <section class="py-24 px-6 max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-black text-[#1d3557] italic uppercase tracking-tighter">Community Voice</h2>
+                    </div>
+                    <div class="review-float rounded-[3rem] p-10 text-center glass-card">
+                        <div class="space-y-4">
+                            <div class="text-4xl">✨</div>
+                            <p class="text-gray-400 italic font-light text-xl">No reviews yet. Be the first to share your experience!</p>
+                            <button onclick="navigateTo('reviews')" class="text-[#7fb3e6] font-bold uppercase tracking-widest text-xs hover:underline mt-4">Write a review →</button>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="py-32 bg-slate-50 px-6">
                     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
                         <div class="order-2 md:order-1 text-left">
@@ -157,7 +185,7 @@
                                 <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
                                 <p class="text-2xl text-blue-100/70 font-light italic">"Serving over 300 wholesome meals"</p>
                             </div>
-                            <div class="md:w-1/2 flex flex-col gap-6">
+                            <div class="md:w-1/2 flex flex-col gap-6 items-center">
                                 <div class="video-wrapper"><video controls><source src="assets/videos/food1.mp4"></video></div>
                                 <div class="video-wrapper"><video controls><source src="assets/videos/f4.mp4"></video></div>
                             </div>
@@ -167,11 +195,6 @@
                         <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun.</p>
                         <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJF). While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
                         <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-                            <div class="img-container aspect-[3/4]"><img src="assets/images/f1.jpeg"></div>
-                            <div class="img-container aspect-[3/4]"><img src="assets/images/f2.jpeg"></div>
-                            <div class="img-container aspect-[3/4]"><img src="assets/images/f3.jpeg"></div>
-                        </div>
                     </div>
                 </div>
             `,
@@ -185,7 +208,7 @@
                                 <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
                                 <p class="text-2xl text-blue-100/70 font-light italic">"For the kids who want to read but can not"</p>
                             </div>
-                            <div class="md:w-1/2 flex flex-col gap-6">
+                            <div class="md:w-1/2 flex flex-col gap-6 items-center">
                                 <div class="video-wrapper"><video controls><source src="assets/videos/bookdrive3.mp4"></video></div>
                                 <div class="video-wrapper"><video controls><source src="assets/videos/b2.mp4"></video></div>
                             </div>
@@ -195,10 +218,6 @@
                         <p>There's something so special about books. Sadly, not every child gets the chance to experience that joy. That's why Team Nova hosted our very first Book Drive. We collected donations from 29th September to 1st October 2025.</p>
                         <p>Grateful for every heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
                         <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
-                            <div class="img-container aspect-video"><img src="assets/images/b1.jpeg"></div>
-                            <div class="img-container aspect-video"><img src="assets/images/b3.jpeg"></div>
-                        </div>
                     </div>
                 </div>
             `,
@@ -212,21 +231,14 @@
                                 <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
                                 <p class="text-2xl text-blue-100/70 font-light italic">Bringing smiles without barriers.</p>
                             </div>
-                            <div class="md:w-1/2 img-container aspect-[4/5] scale-105"><img src="assets/images/pickle1.jpeg"></div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <div class="video-wrapper"><video controls><source src="assets/videos/pickle12.mp4"></video></div>
+                            </div>
                         </div>
                     </div>
                     <div class="max-w-7xl mx-auto py-24 px-6 text-center">
                         <div class="max-w-3xl mx-auto space-y-8 text-2xl text-gray-600 font-light leading-relaxed mb-20">
-                            <p>Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives. The winners walked away with 10k and an amazing experience.</p>
-                        </div>
-                        <h3 class="text-5xl font-black text-[#1d3557] mb-20 uppercase tracking-tighter italic">EVENT GALLERY</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle8.jpeg"></div>
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle9.jpeg"></div>
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle10.jpeg"></div>
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle11.jpeg"></div>
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle3.jpeg"></div>
-                            <div class="bg-black rounded-[2.5rem] overflow-hidden p-2 aspect-[9/16]"><video controls class="h-full w-full object-cover"><source src="assets/videos/pickle12.mp4"></video></div>
+                            <p>Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives.</p>
                         </div>
                         <div class="slogan-font text-5xl text-[#7fb3e6] mt-12">Love, <br>nova.</div>
                     </div>
@@ -276,12 +288,16 @@
             `
         };
 
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        function toggleMobileMenu() { document.getElementById('mobile-menu')?.classList.toggle('hidden'); }
 
         function navigateTo(viewName) {
-            document.getElementById('app-content').innerHTML = views[viewName] ? views[viewName]() : views['home']();
+            const content = document.getElementById('app-content');
+            if (content) content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Clean up mobile menu if navigating
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+
             if(viewName === 'home') createStars('home-stars');
             if(viewName === 'events') createStars('events-stars');
             if(viewName === 'rotionwheels-detail') createStars('roti-stars');
@@ -293,7 +309,7 @@
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = '';
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 60; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 const size = (Math.random() * 2 + 1) + 'px';
