@@ -31,7 +31,6 @@
         .view-transition { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Floating Review Bubbles Animation */
         .review-track { display: flex; gap: 2rem; padding: 2rem 0; overflow-x: hidden; position: relative; }
         .review-bubble { 
             min-width: 280px; 
@@ -46,10 +45,7 @@
             animation: float 6s infinite ease-in-out;
             animation-delay: var(--delay);
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
     </style>
 </head>
 <body>
@@ -81,266 +77,271 @@
 
     <main id="app-content" class="pt-20 min-h-screen"></main>
 
-    <footer class="w-full py-16 bg-slate-100 border-t border-gray-200 text-center px-6">
+    <footer class="w-full py-20 bg-slate-100 border-t border-gray-200 text-center px-6">
         <div class="max-w-4xl mx-auto">
             <p class="text-gray-500 font-semibold text-lg leading-relaxed">
                 Need help? Contact us at 
-                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-bold underline">@nova_.ngo</a> 
+                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-extrabold underline">@nova_.ngo</a> 
                 for queries, collaborations or donations. <br>
-                <span class="text-[#1d3557] font-black uppercase tracking-widest text-sm mt-4 inline-block">Thank you.</span>
+                <span class="text-[#1d3557] font-black uppercase tracking-widest text-sm mt-6 block">Thank you.</span>
             </p>
         </div>
     </footer>
 </div>
 
-    <script>
-        const views = {
-            home: () => `
-                <section class="starry-bg text-white py-28 md:py-48 px-6 text-center relative overflow-hidden view-transition">
-                    <div id="home-stars"></div>
-                    <div class="relative z-10 max-w-5xl mx-auto">
-                        <span class="inline-block px-5 py-1.5 border border-white/20 rounded-full text-[10px] font-bold tracking-[0.4em] mb-10 uppercase bg-white/5">Youth Led NGO</span>
-                        <h1 class="text-6xl md:text-9xl font-extrabold mb-10 leading-[0.9] tracking-tighter uppercase">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
-                        <p class="text-xl md:text-2xl text-blue-100 font-light max-w-3xl mx-auto leading-relaxed mb-12">Team Nova is a youth led NGO dedicated to spreading happiness through workshops and community action.</p>
-                        <div class="flex justify-center gap-6">
-                            <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-10 py-4 rounded-full font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 transition-all">Past Events</button>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="py-32 bg-slate-50 px-6">
-                    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-                        <div class="order-2 md:order-1 text-left">
-                            <h2 class="text-5xl font-extrabold text-[#7fb3e6] mb-8 uppercase tracking-tighter italic">TEAM NOVA</h2>
-                            <p class="text-gray-600 text-lg leading-relaxed font-light">Through workshops, charity events, and community activities, we strive to bring support, hope, and joy to children and adults who struggle to make ends meet.</p>
-                        </div>
-                        <div class="order-1 md:order-2 img-container aspect-square"><img src="assets/images/about2.jpeg"></div>
-                    </div>
-                </section>
-
-                <section class="py-24 overflow-hidden bg-white">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <h2 class="text-4xl font-black text-[#1d3557] mb-16 text-center italic uppercase">Community Reviews</h2>
-                        <div class="review-track justify-center">
-                            <div class="review-bubble" style="--delay: 0s">
-                                <span class="text-3xl mb-4 opacity-30">✨</span>
-                                <p class="text-gray-400 font-light italic">Waiting for your story...</p>
-                            </div>
-                            <div class="review-bubble hidden md:flex" style="--delay: 1.5s">
-                                <span class="text-3xl mb-4 opacity-30">💙</span>
-                                <p class="text-gray-400 font-light italic">Be the first to review!</p>
-                            </div>
-                            <div class="review-bubble hidden lg:flex" style="--delay: 3s">
-                                <span class="text-3xl mb-4 opacity-30">🌟</span>
-                                <p class="text-gray-400 font-light italic">Your feedback matters.</p>
-                            </div>
-                        </div>
-                        <div class="text-center mt-12">
-                             <button onclick="navigateTo('reviews')" class="bg-[#1d3557] text-white px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-lg hover:bg-[#7fb3e6] transition-all">Write a Review</button>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="py-32 bg-slate-50 px-6">
-                    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-                        <div class="img-container aspect-square"><img src="assets/images/about.jpeg"></div>
-                        <div class="text-left">
-                            <h2 class="text-6xl font-black text-[#1d3557] mb-8 uppercase italic tracking-tighter">OUR AIM</h2>
-                            <p class="text-gray-600 text-xl font-light leading-relaxed mb-10">Team Nova is a non-profit NGO led by youth with the simple goal of spreading happiness even in the smallest of ways.</p>
-                            <div class="bg-blue-50/50 p-10 rounded-[3rem] border-l-[12px] border-[#7fb3e6] shadow-sm">
-                                <h3 class="slogan-font text-5xl text-[#1d3557] leading-snug">"to bring smiles, beyond social, religious and economic barriers"</h3>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `,
-            events: () => `
-                <section class="starry-bg text-white py-24 text-center relative overflow-hidden view-transition">
-                    <div id="events-stars"></div>
-                    <h2 class="text-6xl font-extrabold mb-4 uppercase italic tracking-tighter">PAST EVENTS</h2>
-                </section>
-                <div class="max-w-7xl mx-auto py-24 px-6 grid md:grid-cols-3 gap-8">
-                    <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('rotionwheels-detail')">
-                         <div class="h-64 relative overflow-hidden bg-slate-900 flex items-center justify-center">
-                            <video class="w-full h-full object-cover opacity-60" muted loop playsinline onmouseover="this.play()"><source src="assets/videos/food1.mp4"></video>
-                            <span class="absolute text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">Roti on Wheels</span>
-                         </div>
-                         <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Nutrition</h3></div>
-                    </div>
-                    <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('bookdrive-detail')">
-                         <div class="h-64 relative overflow-hidden">
-                            <img src="assets/images/bookdrive1.jpeg" class="w-full h-full object-cover">
-                            <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">The Book Drive</span>
-                         </div>
-                         <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Education</h3></div>
-                    </div>
-                    <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('pickleball-detail')">
-                         <div class="h-64 relative overflow-hidden">
-                            <img src="assets/images/pickle1.jpeg" class="w-full h-full object-cover">
-                            <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">Pickleball</span>
-                         </div>
-                         <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Fundraiser</h3></div>
+<script>
+    const views = {
+        home: () => `
+            <section class="starry-bg text-white py-28 md:py-48 px-6 text-center relative overflow-hidden view-transition">
+                <div id="home-stars"></div>
+                <div class="relative z-10 max-w-5xl mx-auto">
+                    <span class="inline-block px-5 py-1.5 border border-white/20 rounded-full text-[10px] font-bold tracking-[0.4em] mb-10 uppercase bg-white/5">Youth Led NGO</span>
+                    <h1 class="text-6xl md:text-9xl font-extrabold mb-10 leading-[0.9] tracking-tighter uppercase">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
+                    <p class="text-xl md:text-2xl text-blue-100 font-light max-w-3xl mx-auto leading-relaxed mb-12">Team Nova is a youth led NGO dedicated to spreading happiness through workshops and community action.</p>
+                    <div class="flex justify-center gap-6">
+                        <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-10 py-4 rounded-full font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 transition-all">Past Events</button>
                     </div>
                 </div>
-            `,
-            'rotionwheels-detail': () => `
-                <div class="view-transition pb-24">
-                    <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
-                        <div id="roti-stars"></div>
-                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
-                            <div class="md:w-1/2 text-left">
-                                <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
-                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
-                                <p class="text-2xl text-blue-100/70 font-light italic">"Serving over 300 wholesome meals"</p>
-                            </div>
-                            <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                                <div class="video-wrapper"><video controls><source src="assets/videos/food1.mp4"></video></div>
-                                <div class="video-wrapper"><video controls><source src="assets/videos/f4.mp4"></video></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="max-w-5xl mx-auto py-24 px-6 text-center">
-                        <div class="text-xl text-gray-600 font-light leading-relaxed space-y-8 mb-20">
-                            <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun.</p>
-                            <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJF). While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div class="img-container aspect-[3/4]"><img src="assets/images/f1.jpeg"></div>
-                            <div class="img-container aspect-[3/4]"><img src="assets/images/f2.jpeg"></div>
-                            <div class="img-container aspect-[3/4]"><img src="assets/images/f3.jpeg"></div>
-                        </div>
-                        <div class="slogan-font text-5xl text-[#7fb3e6] mt-20">Love, <br>nova.</div>
-                    </div>
-                </div>
-            `,
-            'bookdrive-detail': () => `
-                <div class="view-transition pb-24">
-                    <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
-                        <div id="book-stars"></div>
-                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
-                            <div class="md:w-1/2 text-left">
-                                <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
-                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
-                                <p class="text-2xl text-blue-100/70 font-light italic">"For the kids who want to read but can not"</p>
-                            </div>
-                            <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                                <div class="video-wrapper"><video controls><source src="assets/videos/bookdrive3.mp4"></video></div>
-                                <div class="video-wrapper"><video controls><source src="assets/videos/b2.mp4"></video></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="max-w-5xl mx-auto py-24 px-6 text-center">
-                        <div class="text-xl text-gray-600 font-light leading-relaxed space-y-8 mb-20">
-                            <p>There's something so special about books. Sadly, not every child gets the chance to experience that joy. That's why Team Nova hosted our very first Book Drive. We collected donations from 29th September to 1st October 2025.</p>
-                            <p>Grateful for every heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="img-container aspect-video"><img src="assets/images/b1.jpeg"></div>
-                            <div class="img-container aspect-video"><img src="assets/images/b3.jpeg"></div>
-                        </div>
-                        <div class="slogan-font text-5xl text-[#7fb3e6] mt-20">Love, <br>nova.</div>
-                    </div>
-                </div>
-            `,
-            'pickleball-detail': () => `
-                <div class="view-transition pb-24">
-                    <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
-                        <div id="pickle-stars"></div>
-                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
-                            <div class="md:w-1/2 text-left">
-                                <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
-                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
-                                <p class="text-2xl text-blue-100/70 font-light italic">Bringing smiles without barriers.</p>
-                            </div>
-                            <div class="md:w-1/2 flex justify-center">
-                                <div class="video-wrapper"><video controls><source src="assets/videos/pickle12.mp4"></video></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="max-w-7xl mx-auto py-24 px-6 text-center space-y-12">
-                        <p class="text-gray-600 text-2xl font-light">Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives. The winners walked away with 10k and an amazing experience.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle8.jpeg"></div>
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle9.jpeg"></div>
-                            <div class="img-container aspect-[4/5]"><img src="assets/images/pickle10.jpeg"></div>
-                        </div>
-                        <div class="slogan-font text-5xl text-[#7fb3e6] mt-20">Love, <br>nova.</div>
-                    </div>
-                </div>
-            `,
-            reviews: () => `
-                <div class="max-w-4xl mx-auto py-24 px-6 view-transition text-center">
-                    <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase italic">WRITE A REVIEW</h2>
-                    <div class="glass-card p-10 rounded-[3rem] shadow-xl text-left">
-                        <form onsubmit="event.preventDefault(); alert('Thank you for your review!'); navigateTo('home');">
-                            <div class="flex justify-center mb-8">
-                                <div class="star-rating">
-                                    <input type="radio" id="star5" name="rating" value="5"/><label for="star5">★</label>
-                                    <input type="radio" id="star4" name="rating" value="4"/><label for="star4">★</label>
-                                    <input type="radio" id="star3" name="rating" value="3"/><label for="star3">★</label>
-                                    <input type="radio" id="star2" name="rating" value="2"/><label for="star2">★</label>
-                                    <input type="radio" id="star1" name="rating" value="1"/><label for="star1">★</label>
-                                </div>
-                            </div>
-                            <div class="space-y-6">
-                                <div>
-                                    <label class="block text-sm font-bold mb-2">Display Name</label>
-                                    <input type="text" placeholder="Your Name" class="w-full p-4 rounded-2xl border border-gray-200 focus:outline-[#7fb3e6]">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-bold mb-2">Comment</label>
-                                    <textarea class="w-full p-4 rounded-2xl border border-gray-200 h-32 focus:outline-[#7fb3e6]" required placeholder="Share your experience..."></textarea>
-                                </div>
-                                <button type="submit" class="w-full bg-[#1d3557] text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all">Post Review</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            `,
-            contact: () => `
-                <div class="max-w-3xl mx-auto py-32 text-center px-6 view-transition">
-                    <h2 class="text-6xl font-black text-[#1d3557] mb-6 uppercase italic tracking-tighter">CONNECT</h2>
-                    <p class="text-xl font-bold mb-10 text-[#1d3557]">teamnova.kolkata@gmail.com</p>
-                    <div class="qr-frame mb-12"><img src="assets/images/about3.jpeg"></div>
-                    <a href="https://ig.me/m/nova_.ngo" target="_blank" class="bg-[#1d3557] text-white px-16 py-5 rounded-full font-black uppercase shadow-xl hover:scale-105 transition-all">MESSAGE US ON INSTAGRAM</a>
-                </div>
-            `
-        };
+            </section>
 
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+            <section class="py-32 bg-slate-50 px-6">
+                <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+                    <div class="order-2 md:order-1 text-left">
+                        <h2 class="text-5xl font-extrabold text-[#7fb3e6] mb-8 uppercase tracking-tighter italic">TEAM NOVA</h2>
+                        <p class="text-gray-600 text-lg leading-relaxed font-light">Through workshops, charity events, and community activities, we strive to bring support, hope, and joy to children and adults who struggle to make ends meet.</p>
+                    </div>
+                    <div class="order-1 md:order-2 img-container aspect-square"><img src="assets/images/about2.jpeg"></div>
+                </div>
+            </section>
 
-        function navigateTo(viewName) {
-            const content = document.getElementById('app-content');
-            content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.getElementById('mobile-menu').classList.add('hidden');
+            <section class="py-24 overflow-hidden bg-white">
+                <div class="max-w-7xl mx-auto px-6">
+                    <h2 class="text-4xl font-black text-[#1d3557] mb-16 text-center italic uppercase">Community Reviews</h2>
+                    <div class="review-track justify-center">
+                        <div class="review-bubble" style="--delay: 0s">
+                            <span class="text-3xl mb-4 opacity-30">✨</span>
+                            <p class="text-gray-400 font-light italic">Waiting for your story...</p>
+                        </div>
+                        <div class="review-bubble hidden md:flex" style="--delay: 1.5s">
+                            <span class="text-3xl mb-4 opacity-30">💙</span>
+                            <p class="text-gray-400 font-light italic">Be the first to review!</p>
+                        </div>
+                        <div class="review-bubble hidden lg:flex" style="--delay: 3s">
+                            <span class="text-3xl mb-4 opacity-30">🌟</span>
+                            <p class="text-gray-400 font-light italic">Your feedback matters.</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                         <button onclick="navigateTo('reviews')" class="bg-[#1d3557] text-white px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-lg hover:scale-105 transition-all">Write Review</button>
+                    </div>
+                </div>
+            </section>
 
-            if(viewName === 'home') createStars('home-stars');
-            if(viewName === 'events') createStars('events-stars');
-            if(viewName === 'rotionwheels-detail') createStars('roti-stars');
-            if(viewName === 'bookdrive-detail') createStars('book-stars');
-            if(viewName === 'pickleball-detail') createStars('pickle-stars');
+            <section class="py-32 bg-slate-50 px-6">
+                <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+                    <div class="img-container aspect-square"><img src="assets/images/about.jpeg"></div>
+                    <div class="text-left">
+                        <h2 class="text-6xl font-black text-[#1d3557] mb-8 uppercase italic tracking-tighter">OUR AIM</h2>
+                        <p class="text-gray-600 text-xl font-light leading-relaxed mb-10">Team Nova is a non-profit NGO led by youth with the simple goal of spreading happiness even in the smallest of ways.</p>
+                        <div class="bg-blue-50/50 p-10 rounded-[3rem] border-l-[12px] border-[#7fb3e6] shadow-sm">
+                            <h3 class="slogan-font text-5xl text-[#1d3557] leading-snug">"to bring smiles, beyond social, religious and economic barriers"</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `,
+        events: () => `
+            <section class="starry-bg text-white py-24 text-center relative overflow-hidden view-transition">
+                <div id="events-stars"></div>
+                <h2 class="text-6xl font-extrabold mb-4 uppercase italic tracking-tighter">PAST EVENTS</h2>
+            </section>
+            <div class="max-w-7xl mx-auto py-24 px-6 grid md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('rotionwheels-detail')">
+                     <div class="h-64 relative overflow-hidden bg-slate-900 flex items-center justify-center">
+                        <video class="w-full h-full object-cover opacity-60" muted loop playsinline onmouseover="this.play()"><source src="assets/videos/food1.mp4"></video>
+                        <span class="absolute text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">Roti on Wheels</span>
+                     </div>
+                     <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Nutrition</h3></div>
+                </div>
+                <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('bookdrive-detail')">
+                     <div class="h-64 relative overflow-hidden">
+                        <img src="assets/images/bookdrive1.jpeg" class="w-full h-full object-cover">
+                        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">The Book Drive</span>
+                     </div>
+                     <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Education</h3></div>
+                </div>
+                <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('pickleball-detail')">
+                     <div class="h-64 relative overflow-hidden">
+                        <img src="assets/images/pickle1.jpeg" class="w-full h-full object-cover">
+                        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">Pickleball</span>
+                     </div>
+                     <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Fundraiser</h3></div>
+                </div>
+            </div>
+        `,
+        'rotionwheels-detail': () => `
+            <div class="view-transition pb-24">
+                <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
+                    <div id="roti-stars"></div>
+                    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
+                        <div class="md:w-1/2 text-left">
+                            <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
+                            <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
+                            <p class="text-2xl text-blue-100/70 font-light italic">"Serving over 300 wholesome meals"</p>
+                        </div>
+                        <div class="md:w-1/2 flex flex-col gap-6 items-center">
+                            <div class="video-wrapper"><video controls><source src="assets/videos/food1.mp4"></video></div>
+                            <div class="video-wrapper"><video controls><source src="assets/videos/f4.mp4"></video></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-5xl mx-auto py-24 px-6 text-center">
+                    <div class="text-xl text-gray-600 font-light leading-relaxed space-y-8 mb-20">
+                        <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun. It was a privilege to see the immediate difference a warm meal makes, providing both nourishment and a sense of community to everyone who visited the truck.</p>
+                        <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJF). While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
+                        <p>We would like to extend a heartfelt thank you to the SLJ Foundation for their incredible partnership and for the use of their innovative mobile kitchen. By combining our resources and shared mission to fight hunger, we were able to ensure that the high-tech, automated "Roti on Wheels" unit reached this high-traffic location to serve those most in need.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="img-container aspect-[3/4]"><img src="assets/images/f1.jpeg"></div>
+                        <div class="img-container aspect-[3/4]"><img src="assets/images/f2.jpeg"></div>
+                        <div class="img-container aspect-[3/4]"><img src="assets/images/f3.jpeg"></div>
+                    </div>
+                    <div class="slogan-font text-5xl text-[#7fb3e6] mt-20">Love, <br>nova.</div>
+                </div>
+            </div>
+        `,
+        'bookdrive-detail': () => `
+            <div class="view-transition pb-24">
+                <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
+                    <div id="book-stars"></div>
+                    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
+                        <div class="md:w-1/2 text-left">
+                            <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
+                            <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
+                            <p class="text-2xl text-blue-100/70 font-light italic">"For the kids who want to read but can not"</p>
+                        </div>
+                        <div class="md:w-1/2 flex flex-col gap-6 items-center">
+                            <div class="video-wrapper"><video controls><source src="assets/videos/bookdrive3.mp4"></video></div>
+                            <div class="video-wrapper"><video controls><source src="assets/videos/b2.mp4"></video></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-5xl mx-auto py-24 px-6 text-center">
+                    <div class="text-xl text-gray-600 font-light leading-relaxed space-y-8 mb-20">
+                        <p>There's something so special about books, we all have a favorite childhood memory linked to a book, whether it's fiction or a comic. Sadly, not every child gets the chance to experience that joy and make memories with pages.</p>
+                        <p>That's why Team Nova hosted our very first Book Drive. We collected donations from 29th September to 1st October 2025. We're collecting storybooks and exercise books to pass on to kids who need them. If you've got a few lying around, we'd love for you to be part of this, just drop them off at any of the locations and make a child's day better.</p>
+                        <p>Grateful for every book, every helping hand, and every heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience. More coming soon!!</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="img-container aspect-video"><img src="assets/images/b1.jpeg"></div>
+                        <div class="img-container aspect-video"><img src="assets/images/b3.jpeg"></div>
+                    </div>
+                    <div class="slogan-font text-5xl text-[#7fb3e6] mt-20">Love, <br>nova.</div>
+                </div>
+            </div>
+        `,
+        'pickleball-detail': () => `
+            <div class="view-transition pb-24">
+                <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
+                    <div id="pickle-stars"></div>
+                    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
+                        <div class="md:w-1/2 text-left">
+                            <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
+                            <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
+                            <p class="text-2xl text-blue-100/70 font-light italic">Bringing smiles without barriers.</p>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center">
+                            <div class="video-wrapper"><video controls><source src="assets/videos/pickle12.mp4"></video></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-7xl mx-auto py-24 px-6 text-center space-y-12">
+                    <div class="max-w-4xl mx-auto text-xl text-gray-600 font-light leading-relaxed mb-20 space-y-8">
+                        <p>nova_.ngo ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers.</p>
+                        <p>The winners walked away with 10k and an amazing experience. Each match was a war of talent, entertaining and nerve wracking to watch! This wouldn't have been possible without you so thank you and more coming soon!</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="img-container aspect-[4/5]"><img src="assets/images/pickle8.jpeg"></div>
+                        <div class="img-container aspect-[4/5]"><img src="assets/images/pickle9.jpeg"></div>
+                        <div class="img-container aspect-[4/5]"><img src="assets/images/pickle10.jpeg"></div>
+                    </div>
+                    <div class="slogan-font text-5xl text-[#7fb3e6] mt-20">Love, <br>nova.</div>
+                </div>
+            </div>
+        `,
+        reviews: () => `
+            <div class="max-w-4xl mx-auto py-24 px-6 view-transition text-center">
+                <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase italic">WRITE A REVIEW</h2>
+                <div class="glass-card p-10 rounded-[3rem] shadow-xl text-left">
+                    <form onsubmit="event.preventDefault(); alert('Thank you for your review!'); navigateTo('home');">
+                        <div class="flex justify-center mb-8">
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5"/><label for="star5">★</label>
+                                <input type="radio" id="star4" name="rating" value="4"/><label for="star4">★</label>
+                                <input type="radio" id="star3" name="rating" value="3"/><label for="star3">★</label>
+                                <input type="radio" id="star2" name="rating" value="2"/><label for="star2">★</label>
+                                <input type="radio" id="star1" name="rating" value="1"/><label for="star1">★</label>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-bold mb-2">Display Name</label>
+                                <input type="text" placeholder="Your Name" class="w-full p-4 rounded-2xl border border-gray-200 focus:outline-[#7fb3e6]">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2">Comment</label>
+                                <textarea class="w-full p-4 rounded-2xl border border-gray-200 h-32 focus:outline-[#7fb3e6]" required placeholder="Share your experience..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-[#1d3557] text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all">Post Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        `,
+        contact: () => `
+            <div class="max-w-3xl mx-auto py-32 text-center px-6 view-transition">
+                <h2 class="text-6xl font-black text-[#1d3557] mb-6 uppercase italic tracking-tighter">CONNECT</h2>
+                <p class="text-xl font-bold mb-10 text-[#1d3557]">teamnova.kolkata@gmail.com</p>
+                <div class="qr-frame mb-12"><img src="assets/images/about3.jpeg"></div>
+                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="bg-[#1d3557] text-white px-16 py-5 rounded-full font-black uppercase shadow-xl hover:scale-105 transition-all">MESSAGE US ON INSTAGRAM</a>
+            </div>
+        `
+    };
+
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+
+    function navigateTo(viewName) {
+        const content = document.getElementById('app-content');
+        content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.getElementById('mobile-menu').classList.add('hidden');
+
+        if(viewName === 'home') createStars('home-stars');
+        if(viewName === 'events') createStars('events-stars');
+        if(viewName === 'rotionwheels-detail') createStars('roti-stars');
+        if(viewName === 'bookdrive-detail') createStars('book-stars');
+        if(viewName === 'pickleball-detail') createStars('pickle-stars');
+    }
+
+    function createStars(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = (Math.random() * 2 + 1) + 'px';
+            star.style.width = size; star.style.height = size;
+            star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            container.appendChild(star);
         }
+    }
 
-        function createStars(containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = '';
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = (Math.random() * 2 + 1) + 'px';
-                star.style.width = size; star.style.height = size;
-                star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%';
-                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-                container.appendChild(star);
-            }
-        }
-
-        window.onload = () => {
-            navigateTo('home');
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#1d3557', '#7fb3e6', '#ffffff'] });
-        };
-    </script>
+    window.onload = () => {
+        navigateTo('home');
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#1d3557', '#7fb3e6', '#ffffff'] });
+    };
+</script>
 </body>
 </html>
