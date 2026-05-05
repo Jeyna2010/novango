@@ -16,7 +16,6 @@
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
 
-        /* Restored original image container styling */
         .img-container { 
             border-radius: 2.5rem; 
             overflow: hidden; 
@@ -55,7 +54,7 @@
             <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
                 <img src="assets/images/logo.jpeg" class="w-full h-full object-cover">
             </div>
-            <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl">Team NOVA</span>
+            <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl uppercase">Team NOVA</span>
         </div>
         <div class="hidden lg:flex space-x-10 text-[10px] font-bold uppercase tracking-widest">
             <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Home</button>
@@ -74,7 +73,7 @@
                     <div id="home-stars"></div>
                     <div class="relative z-10 max-w-5xl mx-auto">
                         <span class="inline-block px-5 py-1.5 border border-white/20 rounded-full text-[10px] font-bold tracking-[0.4em] mb-10 uppercase bg-white/5">Youth Led NGO</span>
-                        <h1 class="text-6xl md:text-9xl font-extrabold mb-10 leading-[0.9] tracking-tighter">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
+                        <h1 class="text-6xl md:text-9xl font-extrabold mb-10 leading-[0.9] tracking-tighter uppercase">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
                         <p class="text-xl md:text-2xl text-blue-100 font-light max-w-3xl mx-auto mb-14 leading-relaxed">Team Nova is a youth led NGO dedicated to spreading happiness to the less fortunate through workshops and community action.</p>
                         <div class="flex flex-col sm:flex-row gap-6 justify-center">
                             <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-2xl">Past Events</button>
@@ -104,7 +103,7 @@
             events: () => `
                 <div class="max-w-7xl mx-auto py-24 px-6 view-transition">
                     <div class="mb-20 text-center">
-                        <h2 class="text-6xl font-extrabold text-[#1d3557] mb-4 uppercase tracking-tighter">PAST EVENTS</h2>
+                        <h2 class="text-6xl font-extrabold text-[#1d3557] mb-4 uppercase tracking-tighter italic">PAST EVENTS</h2>
                         <p class="text-gray-400 font-light text-2xl italic slogan-font">"to see a smile on every face"</p>
                     </div>
                     <div class="grid md:grid-cols-3 gap-8">
@@ -140,54 +139,86 @@
             `,
             'rotionwheels-detail': () => `
                 <div class="view-transition pb-24">
-                    <div class="bg-amber-50/50 py-24 md:py-32 px-6">
-                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+                    <div class="bg-[#1d3557] py-24 md:py-32 px-6 text-white relative overflow-hidden">
+                        <div id="roti-stars"></div>
+                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
                             <div class="md:w-1/2">
-                                <button onclick="navigateTo('events')" class="text-[#1d3557] font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">
+                                <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">
                                     <span class="mr-3 text-lg">←</span> Back to Events
                                 </button>
-                                <h1 class="text-6xl md:text-8xl font-black text-[#1d3557] mb-8 tracking-tighter italic uppercase">ROTI ON <br><span class="text-amber-500">WHEELS</span></h1>
-                                <p class="text-2xl text-gray-600 font-light italic">"Serving over 300 wholesome meals near Ballygunge Station"</p>
+                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
+                                <p class="text-2xl text-blue-100/70 font-light italic leading-relaxed">"Serving over 300 wholesome meals near Ballygunge Station"</p>
+                                <div class="mt-10 bg-white/10 backdrop-blur p-8 rounded-[2.5rem] border border-white/10">
+                                    <p class="text-blue-300 font-bold uppercase tracking-widest text-[10px] mb-2">Partner Highlight</p>
+                                    <p class="font-bold text-lg uppercase leading-tight">NGO Nova & Santosh Lalita Jain Foundation (SLJF)</p>
+                                </div>
                             </div>
-                            <div class="md:w-1/2"><video controls><source src="assets/videos/food1.mp4" type="video/mp4"></video></div>
+                            <div class="md:w-1/2"><video controls class="shadow-2xl border-4 border-white/10"><source src="assets/videos/food1.mp4" type="video/mp4"></video></div>
                         </div>
                     </div>
                     <div class="max-w-6xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-8">
-                        <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We served over 300 people a wholesome meal consisting of fresh rotis, nutritious sabji, tangy aachar, and gulab jamun.</p>
-                        <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJF). While the mobile food truck is an SLJF initiative, NGO Nova took the lead in sponsoring the entire food service for the day.</p>
-                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, nova.</div>
+                        <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun. It was a privilege to see the immediate difference a warm meal makes, providing both nourishment and a sense of community to everyone who visited the truck.</p>
+                        <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJ). While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
+                        <p>We would like to extend a heartfelt thank you to the SLJ Foundation for their incredible partnership and for the use of their innovative mobile kitchen. By combining our resources and shared mission to fight hunger, we were able to ensure that the high-tech, automated "Roti on Wheels" unit reached this high-traffic location to serve those most in need.</p>
+                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
                     </div>
                 </div>
             `,
             'bookdrive-detail': () => `
                 <div class="view-transition pb-24">
-                    <div class="bg-blue-50/50 py-24 px-6">
-                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
-                            <div class="md:w-1/2"><video controls poster="assets/images/bookdrive1.jpeg"><source src="assets/videos/bookdrive3.mp4"></video></div>
-                            <div class="md:w-1/2 img-container"><img src="assets/images/bookdrive2.jpeg"></div>
+                    <div class="bg-blue-50 py-24 md:py-32 px-6 relative overflow-hidden">
+                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
+                            <div class="md:w-1/2">
+                                <button onclick="navigateTo('events')" class="text-[#1d3557] font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">
+                                    <span class="mr-3 text-lg">←</span> Back to Events
+                                </button>
+                                <h1 class="text-6xl md:text-8xl font-black text-[#1d3557] mb-8 italic uppercase tracking-tighter leading-none uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
+                                <p class="text-2xl text-gray-500 font-light italic leading-relaxed">"For the kids who want to read but can not"</p>
+                                <div class="flex gap-4 mt-8">
+                                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-100 flex-1">
+                                        <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Duration</p>
+                                        <p class="font-bold text-[#1d3557]">29 SEPT - 1 OCT</p>
+                                    </div>
+                                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-100 flex-1">
+                                        <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Impact Partner</p>
+                                        <p class="font-bold text-[#1d3557]">CINI INSTITUTE</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 img-container"><img src="assets/images/bookdrive2.jpeg" alt="Book Drive Poster"></div>
                         </div>
                     </div>
                     <div class="max-w-4xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-8">
-                        <p>There's something so special about books... Sadly, not every child gets the chance to experience that joy. Team Nova hosted our very first Book Drive from 29th Sept to 1st Oct 2025.</p>
+                        <p>There's something so special about books, we all have a favorite childhood memory linked to a book, whether it's fiction or a comic. Sadly, not every child gets the chance to experience that joy and make memories with pages. That's why Team Nova is hosting our very first Book Drive. We are collecting donations from 29th September to 1st October 2025.</p>
+                        <p>We're collecting storybooks and exercise books to pass on to kids who need them. If you've got a few lying around, we'd love for you to be part of this, just drop them off at any of the locations and make a child's day better.</p>
                         <p>Grateful for every heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
-                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, nova.</div>
+                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
                     </div>
                 </div>
             `,
             'pickleball-detail': () => `
                 <div class="view-transition pb-24">
-                    <div class="bg-[#1d3557] py-24 md:py-32 px-6 text-white text-center relative overflow-hidden">
+                    <div class="bg-[#1d3557] py-24 md:py-32 px-6 text-white relative overflow-hidden">
                         <div id="pickle-stars"></div>
-                        <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter relative z-10">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
-                        <p class="text-2xl text-blue-100 font-light italic mb-10 relative z-10">Bringing smiles without any barriers.</p>
-                        <div class="bg-white/10 backdrop-blur p-8 inline-block rounded-[2.5rem] border border-white/10 relative z-10">
-                            <p class="font-bold text-xl uppercase">WINNERS WALKED AWAY WITH 10K</p>
+                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
+                            <div class="md:w-1/2">
+                                <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">
+                                    <span class="mr-3 text-lg">←</span> Back to Events
+                                </button>
+                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
+                                <p class="text-2xl text-blue-100/70 font-light italic leading-relaxed">Bringing smiles without any barriers.</p>
+                                <div class="mt-10 bg-white/10 backdrop-blur p-8 rounded-[2.5rem] border border-white/10">
+                                    <p class="text-blue-300 font-bold uppercase tracking-widest text-[10px] mb-2">Fundraiser Results</p>
+                                    <p class="font-bold text-xl uppercase leading-tight">Winners walked away with 10K</p>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 img-container border-none shadow-none scale-105"><img src="assets/images/pickle1.jpeg" alt="Pickleball action"></div>
                         </div>
                     </div>
                     <div class="max-w-7xl mx-auto py-24 px-6">
                         <div class="max-w-3xl mx-auto text-center mb-24 space-y-8 text-2xl text-gray-600 font-light leading-relaxed">
-                            <p>Ngo nova had its first fundraiser! A smash hit with all proceeds going to funding our future drives. The winners walked away with 10k! This wouldn't have been possible without you.</p>
-                            <div class="slogan-font text-5xl text-[#7fb3e6] mt-12">Love, nova.</div>
+                            <p>Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers. The winners walked away with 10k and an amazing experience. Each match was a war of talent, entertaining and nerve wracking to watch! This wouldn't have been possible without you so thank you and more coming soon!</p>
+                            <div class="slogan-font text-5xl text-[#7fb3e6] mt-12 text-center">Love, <br>nova.</div>
                         </div>
                         <h3 class="text-5xl font-black text-[#1d3557] mb-20 text-center uppercase tracking-tighter italic">EVENT GALLERY</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -205,7 +236,7 @@
                 <div class="max-w-4xl mx-auto py-32 px-6 view-transition text-center">
                     <div class="locked-container p-12 md:p-24 rounded-[4rem] border-4 border-dashed border-gray-200 shadow-inner relative overflow-hidden">
                         <h2 class="text-6xl md:text-8xl font-black text-[#1d3557] mb-6 uppercase italic tracking-widest leading-none relative z-10">TOP SECRET</h2>
-                        <p class="text-gray-400 text-xl font-light italic slogan-font text-3xl relative z-10">Something spectacular is forming in the Nova constellation.</p>
+                        <p class="text-gray-400 text-xl font-light italic slogan-font text-3xl relative z-10">Something spectacular is forming in the Nova constellation. We aren't ready to show you yet, but we promise it's worth the wait.</p>
                     </div>
                 </div>
             `,
@@ -227,6 +258,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if(viewName === 'home') createStars('home-stars');
             if(viewName === 'pickleball-detail') createStars('pickle-stars');
+            if(viewName === 'rotionwheels-detail') createStars('roti-stars');
         }
 
         function createStars(containerId) {
