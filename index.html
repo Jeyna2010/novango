@@ -10,27 +10,27 @@
     <style>
         :root { --nova-navy: #1d3557; --nova-sky: #7fb3e6; --nova-white: #ffffff; }
         
-        /* 85% Zoom Implementation */
-        body { 
-            font-family: 'Inter', sans-serif; 
+        /* Fixed 85% Zoom Logic */
+        html, body { 
             background-color: var(--nova-white); 
-            color: var(--nova-navy); 
-            overflow-x: hidden; 
-            scroll-behavior: smooth;
+            margin: 0; 
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        #zoom-wrapper {
             transform: scale(0.85);
             transform-origin: top center;
-            width: 117.6%; /* Offsets the shrinkage to keep the width feeling "full" */
-            margin-left: -8.8%; /* Centers the oversized width */
+            width: 117.65%; /* Corresponds to 1/0.85 to fill the width */
+            margin-left: -8.825%; /* Centers the scaled-up width */
+            min-height: 117.65vh;
         }
 
-        /* Ensure nav stays fixed correctly at scaled size */
-        nav {
-            width: 100% !important;
-            left: 0;
-        }
-
+        body { font-family: 'Inter', sans-serif; color: var(--nova-navy); scroll-behavior: smooth; }
         h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
         .slogan-font { font-family: 'Caveat', cursive; }
+        
         .starry-bg { background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
@@ -45,6 +45,7 @@
         .qr-frame { max-width: 260px; margin: 0 auto; border: 10px solid white; border-radius: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white; overflow: hidden; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
         .view-transition { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
         .star-rating { direction: rtl; display: inline-block; padding: 20px; }
         .star-rating input { display: none; }
         .star-rating label { color: #ccc; cursor: pointer; font-size: 35px; transition: 0.2s; }
@@ -53,31 +54,35 @@
 </head>
 <body>
 
-    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-20 flex items-center justify-between px-6">
+<div id="zoom-wrapper">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-24 flex items-center justify-between px-10">
         <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
-            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
+            <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
                 <img src="assets/images/logo.jpeg" class="w-full h-full object-cover">
             </div>
-            <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl uppercase">Team NOVA</span>
+            <span class="ml-4 font-black text-[#1d3557] italic tracking-tighter text-2xl uppercase">Team NOVA</span>
         </div>
-        <div class="hidden lg:flex space-x-10 text-[13px] font-bold uppercase tracking-widest">
-            <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6]">Home</button>
-            <button onclick="navigateTo('events')" class="text-[#1d3557] hover:text-[#7fb3e6]">Events</button>
-            <button onclick="navigateTo('reviews')" class="text-[#1d3557] hover:text-[#7fb3e6]">Write Review</button>
-            <button onclick="navigateTo('contact')" class="text-[#7fb3e6]">Connect</button>
+        <!-- TASKBAR TEXT: Increased to text-[16px] (approx 1rem) so it survives the 85% shrink -->
+        <div class="hidden lg:flex space-x-12 text-[16px] font-bold uppercase tracking-[0.15em]">
+            <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Home</button>
+            <button onclick="navigateTo('events')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Events</button>
+            <button onclick="navigateTo('reviews')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Write Review</button>
+            <button onclick="navigateTo('contact')" class="text-[#7fb3e6] hover:opacity-80 transition-opacity">Connect</button>
         </div>
         <button class="lg:hidden text-[#1d3557]" onclick="toggleMobileMenu()">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
-        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col space-y-4 lg:hidden shadow-lg">
-            <button onclick="navigateTo('home')" class="text-left font-bold text-xs uppercase">Home</button>
-            <button onclick="navigateTo('events')" class="text-left font-bold text-xs uppercase">Events</button>
-            <button onclick="navigateTo('reviews')" class="text-left font-bold text-xs uppercase">Write Review</button>
-            <button onclick="navigateTo('contact')" class="text-left font-bold text-xs uppercase text-[#7fb3e6]">Connect</button>
+        <div id="mobile-menu" class="hidden absolute top-24 left-0 w-full bg-white border-b border-gray-100 p-8 flex flex-col space-y-6 lg:hidden shadow-lg">
+            <button onclick="navigateTo('home')" class="text-left font-bold text-lg uppercase">Home</button>
+            <button onclick="navigateTo('events')" class="text-left font-bold text-lg uppercase">Events</button>
+            <button onclick="navigateTo('reviews')" class="text-left font-bold text-lg uppercase">Write Review</button>
+            <button onclick="navigateTo('contact')" class="text-left font-bold text-lg uppercase text-[#7fb3e6]">Connect</button>
         </div>
     </nav>
 
-    <main id="app-content" class="pt-20 min-h-screen"></main>
+    <main id="app-content" class="pt-24 min-h-screen"></main>
+</div>
 
     <script>
         const views = {
@@ -89,7 +94,7 @@
                         <h1 class="text-6xl md:text-9xl font-extrabold mb-10 leading-[0.9] tracking-tighter uppercase">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
                         <p class="text-xl md:text-2xl text-blue-100 font-light max-w-3xl mx-auto leading-relaxed mb-12">Team Nova is a youth led NGO dedicated to spreading happiness through workshops and community action.</p>
                         <div class="flex justify-center gap-6">
-                            <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-10 py-4 rounded-full font-black text-xs uppercase tracking-widest shadow-xl hover:scale-105 transition-all">Past Events</button>
+                            <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 transition-all">Past Events</button>
                         </div>
                     </div>
                 </section>
@@ -162,7 +167,6 @@
                         <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun.</p>
                         <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJF). While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
                         <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
                             <div class="img-container aspect-[3/4]"><img src="assets/images/f1.jpeg"></div>
                             <div class="img-container aspect-[3/4]"><img src="assets/images/f2.jpeg"></div>
@@ -191,7 +195,6 @@
                         <p>There's something so special about books. Sadly, not every child gets the chance to experience that joy. That's why Team Nova hosted our very first Book Drive. We collected donations from 29th September to 1st October 2025.</p>
                         <p>Grateful for every heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
                         <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
                             <div class="img-container aspect-video"><img src="assets/images/b1.jpeg"></div>
                             <div class="img-container aspect-video"><img src="assets/images/b3.jpeg"></div>
