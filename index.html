@@ -102,6 +102,22 @@
                     </div>
                 </section>
 
+                <!-- SECTION ABOUT TEAM NOVA -->
+                <section class="py-32 bg-slate-50 px-6">
+                    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+                        <div class="order-2 md:order-1 text-left">
+                            <h2 class="text-5xl font-extrabold text-[#7fb3e6] mb-8 uppercase tracking-tighter italic">TEAM NOVA</h2>
+                            <p class="text-gray-600 text-lg leading-relaxed font-light">
+                                Through workshops, charity events, and community activities, we strive to bring support, hope, and joy to children and adults who struggle to make ends meet.
+                            </p>
+                        </div>
+                        <div class="order-1 md:order-2 img-container aspect-square">
+                            <img src="assets/images/about2.jpeg" alt="Team Nova Action">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION OUR AIM -->
                 <section class="py-32 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
                     <div class="img-container aspect-square"><img src="assets/images/about.jpeg" alt="Our Aim"></div>
                     <div class="text-left">
@@ -188,49 +204,19 @@
                          <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Nutrition</h3></div>
                     </div>
                 </div>
-            `,
-            'rotionwheels-detail': () => `
-                <div class="view-transition pb-24">
-                    <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
-                        <div id="roti-stars"></div>
-                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
-                            <div class="md:w-1/2 text-left">
-                                <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">
-                                    <span class="mr-3 text-lg">←</span> Back to Events
-                                </button>
-                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
-                                <p class="text-2xl text-blue-100/70 font-light italic leading-relaxed">"Serving over 300 wholesome meals near Ballygunge Station"</p>
-                            </div>
-                            <div class="md:w-1/2"><video controls class="shadow-2xl border-4 border-white/10"><source src="assets/videos/food1.mp4" type="video/mp4"></video></div>
-                        </div>
-                    </div>
-                    <div class="max-w-6xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-8">
-                        <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We served over 300 people a hot meal consisting of fresh rotis, sabji, aachar, and gulab jamun.</p>
-                        <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJ). NGO Nova sponsored and facilitated the entire service for the day.</p>
-                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
-                    </div>
-                </div>
             `
         };
 
         function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
         function navigateTo(viewName) {
-            const content = document.getElementById('app-content');
-            if (views[viewName]) {
-                content.innerHTML = views[viewName]();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu) mobileMenu.classList.add('hidden');
-
+            document.getElementById('app-content').innerHTML = views[viewName] ? views[viewName]() : views['home']();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('mobile-menu').classList.add('hidden');
             if(viewName === 'home') createStars('home-stars');
             if(viewName === 'events') createStars('events-stars');
-            if(viewName === 'rotionwheels-detail') createStars('roti-stars');
         }
 
         function createStars(containerId) {
