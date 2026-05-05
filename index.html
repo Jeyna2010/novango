@@ -21,13 +21,8 @@
             scroll-behavior: smooth;
         }
 
-        h1, h2, h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        .slogan-font {
-            font-family: 'Caveat', cursive;
-        }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .slogan-font { font-family: 'Caveat', cursive; }
 
         .starry-bg {
             background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%);
@@ -80,9 +75,7 @@
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover::after {
-            width: 100%;
-        }
+        .nav-link:hover::after { width: 100%; }
 
         .view-transition {
             animation: fadeIn 0.6s ease-out forwards;
@@ -145,19 +138,16 @@
                 </div>
                 <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl">Team NOVA</span>
             </div>
-            
             <div class="hidden lg:flex items-center space-x-10">
                 <button onclick="navigateTo('home')" class="nav-link text-[#1d3557]">Home</button>
                 <button onclick="navigateTo('events')" class="nav-link text-[#1d3557]">Events</button>
                 <button onclick="navigateTo('upcoming')" class="nav-link text-[#1d3557]">Upcoming</button>
                 <button onclick="navigateTo('contact')" class="nav-link text-[#7fb3e6]">Connect</button>
             </div>
-
             <button class="lg:hidden text-[#1d3557]" onclick="toggleMobileMenu()">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
-        
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-gray-100 p-6 flex flex-col space-y-4">
             <button onclick="navigateTo('home')" class="text-left font-bold text-sm uppercase">Home</button>
             <button onclick="navigateTo('events')" class="text-left font-bold text-sm uppercase">Events</button>
@@ -212,9 +202,23 @@
                     </div>
                 </section>
 
+                <section class="py-32 bg-slate-50 px-6">
+                    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+                        <div class="order-2 md:order-1">
+                            <h2 class="text-5xl font-extrabold text-[#1d3557] mb-8 uppercase tracking-tighter italic text-[#7fb3e6]">TEAM NOVA</h2>
+                            <p class="text-gray-600 text-lg leading-relaxed mb-10 font-light">
+                                Through workshops, charity events, and community activities, we strive to bring support, hope, and joy to children and adults who struggle to make ends meet.
+                            </p>
+                        </div>
+                        <div class="order-1 md:order-2 img-container">
+                            <img src="assets/images/about2.jpeg" alt="Team Nova Image">
+                        </div>
+                    </div>
+                </section>
+
                 <section class="py-32 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
                     <div class="img-container">
-                        <img src="assets/images/about.jpeg" alt="about.jpeg">
+                        <img src="assets/images/about.jpeg" alt="Our Aim Image">
                     </div>
                     <div>
                         <h2 class="text-5xl font-extrabold text-[#1d3557] mb-8 uppercase tracking-tighter italic">OUR AIM</h2>
@@ -226,20 +230,6 @@
                         </div>
                     </div>
                 </section>
-
-                <section class="py-32 bg-slate-50 px-6">
-                    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-                        <div class="order-2 md:order-1">
-                            <h2 class="text-5xl font-extrabold text-[#1d3557] mb-8 uppercase tracking-tighter italic text-[#7fb3e6]">TEAM NOVA</h2>
-                            <p class="text-gray-600 text-lg leading-relaxed mb-10 font-light">
-                                Through workshops, charity events, and community activities, we strive to bring support, hope, and joy to children and adults who struggle to make ends meet.
-                            </p>
-                        </div>
-                        <div class="order-1 md:order-2 img-container">
-                            <img src="assets/images/about2.jpeg" alt="about2.jpeg">
-                        </div>
-                    </div>
-                </section>
             `,
             events: () => `
                 <div class="max-w-7xl mx-auto py-24 px-6 view-transition">
@@ -247,7 +237,6 @@
                         <h2 class="text-6xl font-extrabold text-[#1d3557] mb-4 uppercase tracking-tighter">PAST EVENTS</h2>
                         <p class="text-gray-400 font-light text-lg italic slogan-font text-2xl">"to see a smile on every face"</p>
                     </div>
-                    
                     <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                         <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer group" onclick="navigateTo('rotionwheels-detail')">
                             <div class="h-64 relative overflow-hidden bg-slate-900 flex items-center justify-center">
@@ -262,7 +251,6 @@
                                 <h3 class="text-2xl font-black text-[#1d3557] mb-2 uppercase">Nutrition</h3>
                             </div>
                         </div>
-
                         <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer group" onclick="navigateTo('bookdrive-detail')">
                             <div class="h-64 relative overflow-hidden">
                                 <img src="assets/images/bookdrive1.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -274,7 +262,6 @@
                                 <h3 class="text-2xl font-black text-[#1d3557] mb-2 uppercase">Education</h3>
                             </div>
                         </div>
-
                         <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer group" onclick="navigateTo('pickleball-detail')">
                             <div class="h-64 relative overflow-hidden">
                                 <img src="assets/images/pickle1.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -313,21 +300,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="max-w-6xl mx-auto py-24 px-6">
-                        <div class="grid md:grid-cols-2 gap-16 items-start">
-                            <div class="space-y-8 text-xl text-gray-600 font-light leading-relaxed">
-                                <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun.</p>
-                                <p>It was a privilege to see the immediate difference a warm meal makes, providing both nourishment and a sense of community to everyone who visited the truck.</p>
-                            </div>
-                            <div class="space-y-8 text-xl text-gray-600 font-light leading-relaxed">
-                                <p>While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
-                                <p>We extend a heartfelt thank you to the SLJ Foundation for their incredible partnership and for the use of their innovative mobile kitchen unit.</p>
-                            </div>
-                        </div>
-                        <div class="mt-20 text-center">
-                            <div class="slogan-font text-5xl text-[#7fb3e6]">Love, nova.</div>
-                        </div>
-                    </div>
                 </div>
             `,
             'bookdrive-detail': () => `
@@ -339,38 +311,17 @@
                                     <span class="mr-3 text-lg">←</span> Back to Events
                                 </button>
                                 <h1 class="text-6xl md:text-8xl font-black text-[#1d3557] mb-8 tracking-tighter italic uppercase">BOOK <br><span class="text-[#7fb3e6]">DRIVE</span></h1>
-                                <p class="text-2xl text-gray-600 leading-relaxed font-light mb-10 italic">"For the kids who want to read but can not"</p>
-                                <div class="flex gap-4">
-                                    <div class="bg-white p-6 rounded-3xl shadow-sm">
-                                        <p class="text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-2">Duration</p>
-                                        <p class="font-bold text-[#1d3557] text-sm uppercase">29 Sept - 1 Oct</p>
-                                    </div>
-                                    <div class="bg-white p-6 rounded-3xl shadow-sm">
-                                        <p class="text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-2">Impact Partner</p>
-                                        <p class="font-bold text-[#1d3557] text-sm uppercase">CINI Institute</p>
-                                    </div>
+                            </div>
+                            <div class="md:w-full grid md:grid-cols-2 gap-8 items-center">
+                                <div class="bg-black rounded-[2.5rem] overflow-hidden p-2">
+                                    <video controls poster="assets/images/bookdrive1.jpeg" class="w-full h-full object-cover">
+                                        <source src="assets/videos/bookdrive3.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="img-container aspect-[3/4]">
+                                    <img src="assets/images/bookdrive2.jpeg" alt="Information poster" class="w-full h-full object-cover object-top">
                                 </div>
                             </div>
-                            <div class="md:w-1/2 img-container scale-105">
-                                <img src="assets/images/bookdrive1.jpeg" alt="bookdrive1.jpeg">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="max-w-6xl mx-auto py-24 px-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-                            <div class="img-container">
-                                <img src="assets/images/bookdrive2.jpeg" alt="bookdrive2.jpeg">
-                            </div>
-                            <div class="bg-black rounded-[2.5rem] overflow-hidden p-2">
-                                <video controls poster="assets/images/bookdrive1.jpeg">
-                                    <source src="assets/videos/bookdrive3.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                        <div class="bg-[#1d3557] text-white p-12 md:p-20 rounded-[4rem] text-center">
-                            <h3 class="text-3xl md:text-5xl font-black mb-6 italic tracking-tighter italic uppercase">Grateful for every heart that joined us!</h3>
-                            <p class="text-blue-100 text-lg font-light max-w-2xl mx-auto mb-10">Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
-                            <div class="slogan-font text-5xl text-[#7fb3e6]">Love, nova.</div>
                         </div>
                     </div>
                 </div>
@@ -387,35 +338,40 @@
                                 <h1 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter italic uppercase">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
                                 <p class="text-2xl text-blue-100/70 font-light mb-12 italic leading-relaxed">Bringing smiles without any barriers.</p>
                                 <div class="bg-white/10 backdrop-blur p-8 rounded-[2.5rem] border border-white/10">
-                                    <p class="text-blue-300 font-bold uppercase tracking-widest text-[10px] mb-2 uppercase tracking-widest">Fundraiser Results</p>
+                                    <p class="text-blue-300 font-bold uppercase tracking-widest text-[10px] mb-2">Fundraiser Results</p>
                                     <p class="font-bold text-xl uppercase">WINNERS WALKED AWAY WITH 10K</p>
                                 </div>
                             </div>
                             <div class="md:w-1/2 img-container scale-105 border-none shadow-none">
-                                <img src="assets/images/pickle1.jpeg" alt="pickle1.jpeg">
+                                <img src="assets/images/pickle1.jpeg" alt="Pickleball event main">
                             </div>
                         </div>
                     </div>
+
                     <div class="max-w-7xl mx-auto py-24 px-6">
-                        <div class="max-w-3xl mx-auto text-center mb-24 space-y-8 text-2xl text-gray-600 font-light leading-relaxed">
-                            <p>Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers.</p>
-                            <p>The winners walked away with 10k and an amazing experience. Each match was a war of talent, entertaining and nerve wracking to watch! This wouldn't have been possible without you so thank you and more coming soon!</p>
+                        <div class="max-w-3xl mx-auto text-center mb-24 space-y-8 text-2xl text-gray-600 font-light leading-relaxed italic">
+                            <p>NGO Nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers.</p>
                             <div class="slogan-font text-5xl text-[#7fb3e6] mt-12">Love, nova.</div>
                         </div>
-                        <h3 class="text-5xl font-black text-[#1d3557] mb-20 text-center uppercase tracking-tighter italic uppercase">EVENT GALLERY</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-                             <div class="flex flex-col gap-6">
-                                <div class="bg-black rounded-[3rem] overflow-hidden p-2">
-                                    <video controls>
-                                        <source src="assets/videos/pickle2.mp4" type="video/mp4">
-                                    </video>
-                                </div>
+
+                        <h3 class="text-5xl font-black text-[#1d3557] mb-20 text-center uppercase tracking-tighter italic">EVENT GALLERY</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                             <div class="img-container"><img src="assets/images/winners.jpeg" alt="Winners Photo"></div>
+                             <div class="img-container"><img src="assets/images/runnersup.jpeg" alt="Runners Up Photo"></div>
+                             <div class="img-container"><img src="assets/images/action1.jpeg" alt="Pickleball Action"></div>
+                             <div class="img-container"><img src="assets/images/action2.jpeg" alt="Action Shot 2"></div>
+                             <div class="img-container"><img src="assets/images/equipment.jpeg" alt="Paddles and Ball"></div>
+                             
+                             <!-- NEW VIDEO HIGHLIGHT -->
+                             <div class="bg-black rounded-[2.5rem] overflow-hidden p-2 aspect-[9/16]">
+                                <video controls class="w-full h-full object-cover">
+                                    <source src="assets/videos/pickle-highlight.mp4" type="video/mp4">
+                                </video>
                              </div>
-                             <div class="flex flex-col gap-6">
-                                <div class="img-container">
-                                    <img src="assets/images/pickle1.jpeg" alt="pickle1.jpeg">
-                                </div>
-                             </div>
+
+                             <!-- NEW PHOTO HIGHLIGHT -->
+                             <div class="img-container"><img src="assets/images/team-members.jpeg" alt="Team members at court"></div>
                         </div>
                     </div>
                 </div>
@@ -423,34 +379,17 @@
             upcoming: () => `
                 <div class="max-w-4xl mx-auto py-32 px-6 view-transition text-center">
                     <div class="locked-container p-12 md:p-24 rounded-[4rem] border-4 border-dashed border-gray-200 shadow-inner relative overflow-hidden">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] scale-[2] pointer-events-none">
-                            <svg viewBox="0 0 24 24" class="w-full" fill="currentColor">
-                                <path d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7c0-2.757-2.243-5-5-5zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm3 10a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
-                            </svg>
-                        </div>
-                        <div class="relative z-10">
-                            <div class="w-24 h-24 bg-[#1d3557] rounded-full flex items-center justify-center mx-auto mb-8 text-white shadow-xl">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <h2 class="text-5xl md:text-7xl font-black text-[#1d3557] mb-6 uppercase tracking-[0.2em] italic">TOP SECRET</h2>
-                            <div class="inline-block bg-[#1d3557] text-[#7fb3e6] px-8 py-2 rounded-lg font-black text-sm tracking-[0.3em] mb-10 shadow-lg">
-                                ACCESS LOCKED
-                            </div>
-                            <p class="text-gray-400 text-xl font-light leading-relaxed max-w-xl mx-auto italic mb-12">
-                                Something spectacular is forming in the Nova constellation. We aren't ready to show you yet, but we promise it's worth the wait.
-                            </p>
-                        </div>
+                        <h2 class="text-5xl md:text-7xl font-black text-[#1d3557] mb-6 uppercase tracking-[0.2em] italic">TOP SECRET</h2>
+                        <div class="inline-block bg-[#1d3557] text-[#7fb3e6] px-8 py-2 rounded-lg font-black text-sm tracking-[0.3em] mb-10 shadow-lg">ACCESS LOCKED</div>
+                        <p class="text-gray-400 text-xl font-light leading-relaxed max-w-xl mx-auto italic">Something spectacular is forming in the Nova constellation. Stay tuned!</p>
                     </div>
                 </div>
             `,
             contact: () => `
                 <div class="max-w-3xl mx-auto py-32 px-6 text-center view-transition">
-                    <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase tracking-tighter italic leading-none uppercase">CONNECT</h2>
+                    <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase tracking-tighter italic leading-none">CONNECT</h2>
                     <div class="qr-container">
-                        <img src="assets/images/about3.jpeg" alt="about3.jpeg">
+                        <img src="assets/images/about3.jpeg" alt="Instagram QR">
                     </div>
                 </div>
             `
