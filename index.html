@@ -30,14 +30,20 @@
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(29, 53, 87, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .glass-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(29, 53, 87, 0.12); }
 
+        /* Cropped QR container */
         .qr-frame { 
-            max-width: 300px; 
+            max-width: 250px; 
             margin: 0 auto; 
-            border: 10px solid white; 
-            border-radius: 2rem; 
+            border: 8px solid white; 
+            border-radius: 1.5rem; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
             background: white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        .qr-frame img { width: 120%; height: 120%; object-fit: cover; } /* Zoom/Crop effect */
 
         .locked-container {
             background: repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #f1f5f9 10px, #f1f5f9 20px);
@@ -175,17 +181,21 @@
                                 <h1 class="text-6xl md:text-8xl font-black text-[#1d3557] mb-8 italic uppercase tracking-tighter leading-none uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
                                 <p class="text-2xl text-gray-500 font-light italic leading-relaxed">"For the kids who want to read but can not"</p>
                                 <div class="flex gap-4 mt-8">
-                                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-100 flex-1">
+                                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-100 flex-1 text-center">
                                         <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Duration</p>
                                         <p class="font-bold text-[#1d3557]">29 SEPT - 1 OCT</p>
                                     </div>
-                                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-100 flex-1">
+                                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-100 flex-1 text-center">
                                         <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Impact Partner</p>
                                         <p class="font-bold text-[#1d3557]">CINI INSTITUTE</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="md:w-1/2 img-container"><img src="assets/images/bookdrive2.jpeg" alt="Book Drive Poster"></div>
+                            <div class="md:w-1/2">
+                                <video controls class="shadow-2xl">
+                                    <source src="assets/videos/bookdrive3.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
                     <div class="max-w-4xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-8">
@@ -243,7 +253,7 @@
             contact: () => `
                 <div class="max-w-3xl mx-auto py-32 text-center px-6 view-transition">
                     <h2 class="text-6xl font-black text-[#1d3557] mb-12 uppercase italic tracking-tighter">CONNECT</h2>
-                    <div class="qr-frame p-4"><img src="assets/images/about3.jpeg" class="w-full h-auto"></div>
+                    <div class="qr-frame"><img src="assets/images/about3.jpeg" class="w-full h-auto"></div>
                     <div class="mt-12 space-y-6">
                         <p class="text-gray-500 font-light italic text-lg leading-relaxed">For complaints, queries or collaborations, please message us at:</p>
                         <a href="https://instagram.com/nova_.ngo" target="_blank" class="inline-block bg-[#1d3557] text-[#7fb3e6] px-12 py-4 rounded-full font-black text-xl shadow-xl hover:scale-105 transition-all">@nova_.ngo</a>
