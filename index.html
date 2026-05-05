@@ -16,7 +16,6 @@
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
 
-        /* Unified Image Container: ensures no white parts show */
         .img-container { 
             border-radius: 2.5rem; 
             overflow: hidden; 
@@ -33,7 +32,6 @@
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(29, 53, 87, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .glass-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(29, 53, 87, 0.12); }
 
-        /* Cropped QR Frame */
         .qr-frame { 
             max-width: 260px; 
             margin: 0 auto; 
@@ -66,11 +64,26 @@
             </div>
             <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl uppercase">Team NOVA</span>
         </div>
+
+        <!-- Desktop Menu -->
         <div class="hidden lg:flex space-x-10 text-[10px] font-bold uppercase tracking-widest">
             <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Home</button>
             <button onclick="navigateTo('events')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Events</button>
             <button onclick="navigateTo('upcoming')" class="text-[#1d3557] hover:text-[#7fb3e6] transition-colors">Upcoming</button>
             <button onclick="navigateTo('contact')" class="text-[#7fb3e6]">Connect</button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-[#1d3557]" onclick="toggleMobileMenu()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+        
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col space-y-4 lg:hidden shadow-lg">
+            <button onclick="navigateTo('home')" class="text-left font-bold text-xs uppercase tracking-widest">Home</button>
+            <button onclick="navigateTo('events')" class="text-left font-bold text-xs uppercase tracking-widest">Events</button>
+            <button onclick="navigateTo('upcoming')" class="text-left font-bold text-xs uppercase tracking-widest">Upcoming</button>
+            <button onclick="navigateTo('contact')" class="text-left font-bold text-xs uppercase tracking-widest text-[#7fb3e6]">Connect</button>
         </div>
     </nav>
 
@@ -228,14 +241,6 @@
                     </div>
                 </div>
             `,
-            upcoming: () => `
-                <div class="max-w-4xl mx-auto py-32 px-6 view-transition text-center">
-                    <div class="locked-container p-12 md:p-24 rounded-[4rem] border-4 border-dashed border-gray-200 shadow-inner relative overflow-hidden">
-                        <h2 class="text-6xl md:text-8xl font-black text-[#1d3557] mb-6 uppercase italic tracking-widest leading-none relative z-10">TOP SECRET</h2>
-                        <p class="text-gray-400 text-xl font-light italic slogan-font text-3xl relative z-10">Something spectacular is forming in the Nova constellation. We aren't ready to show you yet, but we promise it's worth the wait.</p>
-                    </div>
-                </div>
-            `,
             contact: () => `
                 <div class="max-w-3xl mx-auto py-32 text-center px-6 view-transition">
                     <h2 class="text-6xl font-black text-[#1d3557] mb-12 uppercase italic tracking-tighter">CONNECT</h2>
@@ -249,9 +254,19 @@
             `
         };
 
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
         function navigateTo(viewName) {
             document.getElementById('app-content').innerHTML = views[viewName]();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Auto-close menu on mobile
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+
             if(viewName === 'home') createStars('home-stars');
             if(viewName === 'pickleball-detail') createStars('pickle-stars');
             if(viewName === 'rotionwheels-detail') createStars('roti-stars');
