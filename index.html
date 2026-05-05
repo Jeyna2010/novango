@@ -14,11 +14,37 @@
         .starry-bg { background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
-        .img-container { border-radius: 2.5rem; overflow: hidden; box-shadow: 0 15px 35px rgba(29, 53, 87, 0.15); background-color: #f8fafc; border: 1px solid rgba(0,0,0,0.05); }
-        .img-container img { width: 100%; height: auto; display: block; object-fit: cover; }
+        
+        /* Fixed Frame Styling to remove white space */
+        .img-container { 
+            border-radius: 2rem; 
+            overflow: hidden; 
+            box-shadow: 0 10px 25px rgba(29, 53, 87, 0.1); 
+            background-color: #000; /* Black background to avoid white gaps */
+            aspect-ratio: 4/5; /* Standardized frame size */
+            display: flex;
+            align-items: flex-start;
+        }
+        .img-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: top; /* Keeps the focus on the content, crops the bottom */
+        }
+        
         video { border-radius: 2rem; width: 100%; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .view-transition { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Smaller QR Container */
+        .qr-wrapper {
+            max-width: 220px;
+            margin: 0 auto;
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 8px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -26,15 +52,15 @@
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
-                <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#7fb3e6] bg-white">
                     <img src="assets/images/image_1dae43.jpg" alt="Logo" class="w-full h-full object-cover">
                 </div>
-                <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl uppercase">Team NOVA</span>
+                <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-lg uppercase">Team NOVA</span>
             </div>
-            <div class="hidden lg:flex items-center space-x-10">
-                <button onclick="navigateTo('home')" class="text-xs font-bold uppercase tracking-widest">Home</button>
-                <button onclick="navigateTo('events')" class="text-xs font-bold uppercase tracking-widest">Events</button>
-                <button onclick="navigateTo('contact')" class="text-xs font-bold uppercase tracking-widest text-[#7fb3e6]">Connect</button>
+            <div class="hidden lg:flex items-center space-x-8">
+                <button onclick="navigateTo('home')" class="text-[10px] font-bold uppercase tracking-[0.2em]">Home</button>
+                <button onclick="navigateTo('events')" class="text-[10px] font-bold uppercase tracking-[0.2em]">Events</button>
+                <button onclick="navigateTo('contact')" class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#7fb3e6]">Connect</button>
             </div>
         </div>
     </nav>
@@ -44,20 +70,20 @@
     <script>
         const views = {
             home: () => `
-                <section class="starry-bg text-white py-32 text-center relative">
+                <section class="starry-bg text-white py-24 text-center relative px-6">
                     <div id="home-stars"></div>
-                    <div class="relative z-10 max-w-5xl mx-auto px-6">
-                        <h1 class="text-7xl md:text-9xl font-extrabold mb-10 leading-[0.9] tracking-tighter">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
-                        <p class="text-xl md:text-2xl text-blue-100 font-light max-w-3xl mx-auto mb-14">Youth-led NGO dedicated to spreading happiness beyond barriers.</p>
-                        <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform">Past Events</button>
+                    <div class="relative z-10 max-w-5xl mx-auto">
+                        <h1 class="text-6xl md:text-8xl font-extrabold mb-8 leading-[0.9] tracking-tighter uppercase">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
+                        <p class="text-lg md:text-xl text-blue-100 font-light max-w-2xl mx-auto mb-10">NGO Nova is a youth led organization dedicated to spreading happiness through community action.</p>
+                        <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-10 py-4 rounded-full font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-transform">View Past Events</button>
                     </div>
                 </section>
 
-                <section class="py-32 bg-slate-50 px-6">
-                    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+                <section class="py-24 bg-slate-50 px-6">
+                    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
                         <div class="order-2 md:order-1">
-                            <h2 class="text-5xl font-extrabold text-[#1d3557] mb-8 uppercase italic text-[#7fb3e6]">TEAM NOVA</h2>
-                            <p class="text-gray-600 text-lg leading-relaxed mb-10 font-light">Through workshops, charity events, and community activities, we strive to bring support, hope, and joy to children and adults who struggle to make ends meet.</p>
+                            <h2 class="text-4xl font-extrabold text-[#1d3557] mb-6 uppercase italic text-[#7fb3e6]">TEAM NOVA</h2>
+                            <p class="text-gray-600 leading-relaxed font-light">Through workshops, charity events, and community activities, we strive to bring support, hope, and joy to children and adults who struggle to make ends meet.</p>
                         </div>
                         <div class="order-1 md:order-2 img-container">
                             <img src="assets/images/image_1d9f7b.png" alt="Team Nova">
@@ -65,126 +91,123 @@
                     </div>
                 </section>
 
-                <section class="py-32 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+                <section class="py-24 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
                     <div class="img-container">
                         <img src="assets/images/image_1daed6.png" alt="Our Aim">
                     </div>
                     <div>
-                        <h2 class="text-5xl font-extrabold text-[#1d3557] mb-8 uppercase italic">OUR AIM</h2>
-                        <p class="text-gray-600 text-xl leading-relaxed mb-8 font-light">Team Nova is a non-profit NGO led by youth with the simple goal of spreading happiness to the less fortunate, even in the smallest of ways.</p>
-                        <div class="bg-blue-50/50 p-10 rounded-[3rem] border-l-[12px] border-[#7fb3e6]">
-                            <h3 class="slogan-font text-5xl text-[#1d3557]">"to bring smiles, beyond social, religious and economic barriers"</h3>
+                        <h2 class="text-4xl font-extrabold text-[#1d3557] mb-6 uppercase italic">OUR AIM</h2>
+                        <p class="text-gray-600 leading-relaxed mb-8 font-light">Team Nova is a non-profit NGO led by youth with the simple goal of spreading happiness to the less fortunate, even in the smallest of ways.</p>
+                        <div class="bg-blue-50/50 p-8 rounded-[2.5rem] border-l-[8px] border-[#7fb3e6]">
+                            <h3 class="slogan-font text-4xl text-[#1d3557]">"to bring smiles, beyond social, religious and economic barriers"</h3>
                         </div>
                     </div>
                 </section>
             `,
+            events: () => `
+                <div class="max-w-7xl mx-auto py-24 px-6 text-center view-transition">
+                    <h2 class="text-5xl font-black text-[#1d3557] mb-16 uppercase italic tracking-tighter">PAST EVENTS</h2>
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div onclick="navigateTo('rotionwheels-detail')" class="glass-card rounded-[2.5rem] p-4 cursor-pointer">
+                             <div class="aspect-square bg-slate-100 rounded-[1.5rem] overflow-hidden mb-4">
+                                <video muted loop playsinline class="w-full h-full object-cover opacity-80">
+                                    <source src="assets/videos/image_1d4ca4.png" type="video/mp4">
+                                </video>
+                             </div>
+                             <h3 class="text-lg font-black uppercase">Roti on Wheels</h3>
+                        </div>
+                        <div onclick="navigateTo('bookdrive-detail')" class="glass-card rounded-[2.5rem] p-4 cursor-pointer">
+                             <div class="aspect-square bg-slate-100 rounded-[1.5rem] overflow-hidden mb-4">
+                                <img src="assets/images/image_1d9ebc.jpg" class="w-full h-full object-cover">
+                             </div>
+                             <h3 class="text-lg font-black uppercase">Book Drive</h3>
+                        </div>
+                        <div onclick="navigateTo('pickleball-detail')" class="glass-card rounded-[2.5rem] p-4 cursor-pointer">
+                             <div class="aspect-square bg-slate-100 rounded-[1.5rem] overflow-hidden mb-4">
+                                <img src="assets/images/pickle1.jpeg" class="w-full h-full object-cover">
+                             </div>
+                             <h3 class="text-lg font-black uppercase">Pickleball Fundraiser</h3>
+                        </div>
+                    </div>
+                </div>
+            `,
             'rotionwheels-detail': () => `
                 <div class="view-transition pb-24">
-                    <div class="bg-amber-50/50 py-24 px-6">
-                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+                    <div class="bg-amber-50/50 py-20 px-6">
+                        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
                             <div class="md:w-1/2">
-                                <h1 class="text-6xl md:text-8xl font-black text-[#1d3557] mb-8 italic uppercase tracking-tighter">ROTI ON <br><span class="text-amber-500">WHEELS</span></h1>
-                                <p class="text-2xl text-gray-600 font-light italic mb-10">"Serving over 300 wholesome meals near Ballygunge Station"</p>
+                                <h1 class="text-5xl md:text-7xl font-black text-[#1d3557] mb-6 italic uppercase tracking-tighter">ROTI ON <br><span class="text-amber-500">WHEELS</span></h1>
+                                <p class="text-xl text-gray-600 font-light italic">"Serving over 300 wholesome meals near Ballygunge Station"</p>
                             </div>
                             <div class="md:w-1/2">
-                                <video controls class="shadow-2xl"><source src="assets/videos/image_1d4ca4.png" type="video/mp4"></video>
+                                <video controls class="shadow-xl"><source src="assets/videos/image_1d4ca4.png" type="video/mp4"></video>
                             </div>
                         </div>
                     </div>
-                    <div class="max-w-4xl mx-auto py-24 px-6 text-xl text-gray-600 space-y-8 font-light leading-relaxed">
+                    <div class="max-w-4xl mx-auto py-20 px-6 text-lg text-gray-600 space-y-6 font-light leading-relaxed">
                         <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun.</p>
                         <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJ). While the specialized mobile food truck is an initiative of the SLJF, NGO Nova took the lead in sponsoring and facilitating the entire food service for the day.</p>
-                        <div class="slogan-font text-5xl text-[#7fb3e6] mt-12">Love, nova.</div>
+                        <p>We would like to extend a heartfelt thank you to the SLJ Foundation for their incredible partnership and for the use of their innovative mobile kitchen.</p>
+                        <div class="slogan-font text-4xl text-[#7fb3e6] mt-8">Love, nova.</div>
                     </div>
                 </div>
             `,
             'bookdrive-detail': () => `
                 <div class="view-transition pb-24">
-                    <div class="bg-blue-50/50 py-24 px-6">
-                        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-                            <div class="bg-black rounded-[2.5rem] overflow-hidden p-2 shadow-2xl">
-                                <video controls poster="assets/images/image_1d9ebc.jpg"><source src="assets/videos/image_1d9ebc.jpg" type="video/mp4"></video>
+                    <div class="bg-blue-50/50 py-20 px-6">
+                        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+                            <div class="bg-black rounded-[2rem] overflow-hidden p-1 shadow-lg aspect-[9/16]">
+                                <video controls><source src="assets/videos/image_1d9ebc.jpg" type="video/mp4"></video>
                             </div>
-                            <div class="img-container aspect-[3/4]">
-                                <img src="assets/images/image_1d9ebc.jpg" alt="Book Drive Poster" class="w-full h-full object-cover object-top">
+                            <div class="img-container">
+                                <img src="assets/images/image_1d9ebc.jpg" alt="Book Drive Poster">
                             </div>
                         </div>
                     </div>
-                    <div class="max-w-4xl mx-auto py-24 px-6 text-xl text-gray-600 space-y-8 font-light">
+                    <div class="max-w-4xl mx-auto py-20 px-6 text-lg text-gray-600 space-y-6 font-light leading-relaxed">
                         <p>There's something so special about books... Sadly, not every child gets the chance to experience that joy. That's why Team Nova hosted our very first Book Drive from 29th Sept to 1st Oct 2025.</p>
-                        <p>Grateful for every book and heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
-                        <div class="slogan-font text-5xl text-[#7fb3e6]">Love, nova.</div>
+                        <p>We're collecting storybooks and exercise books to pass on to kids who need them. Grateful for every heart that joined us! Thank you CINI (Child in Need Institute) for letting us be a part of such a wonderful experience.</p>
+                        <div class="slogan-font text-4xl text-[#7fb3e6]">Love, nova.</div>
                     </div>
                 </div>
             `,
             'pickleball-detail': () => `
                 <div class="view-transition pb-24">
-                    <div class="bg-[#1d3557] py-24 px-6 text-white text-center">
-                        <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
-                        <p class="max-w-2xl mx-auto text-xl text-blue-100 font-light">The winners walked away with 10k and an amazing experience. Each match was a war of talent!</p>
+                    <div class="bg-[#1d3557] py-20 px-6 text-white text-center">
+                        <h1 class="text-5xl md:text-7xl font-black mb-6 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
+                        <p class="max-w-3xl mx-auto text-lg text-blue-100 font-light leading-relaxed">Ngo nova had its first fundraiser! All proceeds go to funding our future drives, bringing a smile to faces without any barriers.</p>
                     </div>
-                    <div class="max-w-7xl mx-auto py-24 px-6">
-                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="max-w-7xl mx-auto py-20 px-6">
+                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                             <div class="img-container"><img src="assets/images/pickle8.jpeg" alt="Winners"></div>
                             <div class="img-container"><img src="assets/images/pickle9.jpeg" alt="Runners Up"></div>
-                            <div class="img-container"><img src="assets/images/pickle10.jpeg" alt="Players"></div>
-                            <div class="img-container"><img src="assets/images/pickle11.jpeg" alt="Team"></div>
-                            <div class="img-container"><img src="assets/images/pickle3.jpeg" alt="The Court"></div>
-                            <div class="bg-black rounded-[2.5rem] overflow-hidden p-2 aspect-[9/16]">
+                            <div class="img-container"><img src="assets/images/pickle10.jpeg" alt="Action Shot"></div>
+                            <div class="img-container"><img src="assets/images/pickle11.jpeg" alt="Team Shot"></div>
+                            <div class="img-container"><img src="assets/images/pickle3.jpeg" alt="Court View"></div>
+                            <div class="bg-black rounded-[2rem] overflow-hidden p-1 aspect-[9/16]">
                                 <video controls><source src="assets/videos/pickle12.mp4" type="video/mp4"></video>
                             </div>
                         </div>
-                        <div class="text-center slogan-font text-5xl text-[#7fb3e6]">Love, nova.</div>
-                    </div>
-                </div>
-            `,
-            events: () => `
-                <div class="max-w-7xl mx-auto py-24 px-6 text-center">
-                    <h2 class="text-6xl font-black text-[#1d3557] mb-20 uppercase italic tracking-tighter">PAST EVENTS</h2>
-                    <div class="grid md:grid-cols-3 gap-12">
-                        <div onclick="navigateTo('rotionwheels-detail')" class="glass-card rounded-[3rem] p-4 cursor-pointer">
-                             <div class="h-64 bg-slate-100 rounded-[2rem] overflow-hidden mb-6">
-                                <video muted loop playsinline class="w-full h-full object-cover opacity-80" onmouseover="this.play()" onmouseout="this.pause()">
-                                    <source src="assets/videos/image_1d4ca4.png" type="video/mp4">
-                                </video>
-                             </div>
-                             <h3 class="text-2xl font-black uppercase">Roti on Wheels</h3>
-                        </div>
-                        <div onclick="navigateTo('bookdrive-detail')" class="glass-card rounded-[3rem] p-4 cursor-pointer">
-                             <div class="h-64 bg-slate-100 rounded-[2rem] overflow-hidden mb-6">
-                                <img src="assets/images/image_1d9ebc.jpg" class="w-full h-full object-cover">
-                             </div>
-                             <h3 class="text-2xl font-black uppercase">Book Drive</h3>
-                        </div>
-                        <div onclick="navigateTo('pickleball-detail')" class="glass-card rounded-[3rem] p-4 cursor-pointer">
-                             <div class="h-64 bg-slate-100 rounded-[2rem] overflow-hidden mb-6">
-                                <img src="assets/images/pickle1.jpeg" class="w-full h-full object-cover">
-                             </div>
-                             <h3 class="text-2xl font-black uppercase">Pickleball Fundraiser</h3>
+                        <div class="max-w-3xl mx-auto text-center text-gray-600 font-light italic">
+                            <p>The winners walked away with 10k and an amazing experience. This wouldn't have been possible without you! Thank you and more coming soon!</p>
+                            <div class="slogan-font text-4xl text-[#7fb3e6] mt-6">Love, nova.</div>
                         </div>
                     </div>
                 </div>
             `,
             contact: () => `
                 <div class="max-w-3xl mx-auto py-32 px-6 text-center view-transition">
-                    <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase italic tracking-tighter">CONNECT</h2>
-                    <div class="qr-container bg-white p-4 shadow-2xl rounded-[3rem]">
-                        <img src="assets/images/about3.jpeg" alt="QR Code" class="w-full">
+                    <h2 class="text-5xl font-black text-[#1d3557] mb-10 uppercase italic tracking-tighter">CONNECT</h2>
+                    <div class="qr-wrapper bg-white">
+                        <img src="assets/images/about3.jpeg" alt="QR Code" class="w-full h-full object-cover">
                     </div>
-                    <p class="mt-12 text-gray-500 slogan-font text-3xl">bring smiles, beyond barriers</p>
-                </div>
-            `,
-            upcoming: () => `
-                <div class="py-32 text-center">
-                    <h2 class="text-5xl font-black italic mb-6">COMING SOON</h2>
-                    <p class="text-gray-400 italic slogan-font text-3xl">More acts of love in the works...</p>
+                    <p class="mt-8 text-gray-500 slogan-font text-2xl italic">bringing smiles, beyond barriers</p>
                 </div>
             `
         };
 
         function navigateTo(viewName) {
-            const content = document.getElementById('app-content');
-            content.innerHTML = views[viewName]();
+            document.getElementById('app-content').innerHTML = views[viewName]();
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if(viewName === 'home') createStars('home-stars');
         }
@@ -193,10 +216,10 @@
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = '';
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 60; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                const size = (Math.random() * 2 + 1) + 'px';
+                const size = (Math.random() * 2) + 'px';
                 star.style.width = size; star.style.height = size;
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
