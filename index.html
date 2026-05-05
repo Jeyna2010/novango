@@ -10,28 +10,19 @@
     <style>
         :root { --nova-navy: #1d3557; --nova-sky: #7fb3e6; --nova-white: #ffffff; }
         
-        html, body { 
-            background-color: var(--nova-white); 
-            margin: 0; 
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
+        /* 85% Zoom Logic - ONLY for Desktop to prevent breaking Mobile Taskbar */
+        @media (min-width: 1024px) {
+            #zoom-wrapper {
+                transform: scale(0.85);
+                transform-origin: top center;
+                width: 117.65%; 
+                margin-left: -8.825%; 
+            }
         }
 
-        #zoom-wrapper {
-            transform: scale(0.85);
-            transform-origin: top center;
-            width: 117.65%; 
-            margin-left: -8.825%; 
-            min-height: 117.65vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        body { font-family: 'Inter', sans-serif; color: var(--nova-navy); scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--nova-white); color: var(--nova-navy); overflow-x: hidden; scroll-behavior: smooth; }
         h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
         .slogan-font { font-family: 'Caveat', cursive; }
-        
         .starry-bg { background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
@@ -39,7 +30,7 @@
         .img-container { border-radius: 2.5rem; overflow: hidden; box-shadow: 0 15px 35px rgba(29, 53, 87, 0.15); background-color: #000; display: flex; align-items: center; justify-content: center; }
         .img-container img { width: 100%; height: 100%; display: block; object-fit: cover; }
         
-        /* Small Video Wrapper - No Cropping */
+        /* Controlled Video Size - No Cropping */
         .video-wrapper { max-width: 280px; width: 100%; margin: 0 auto; }
         video { border-radius: 1.5rem; width: 100%; height: auto; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: block; object-fit: contain; }
         
@@ -52,45 +43,52 @@
         .star-rating input { display: none; }
         .star-rating label { color: #ccc; cursor: pointer; font-size: 35px; transition: 0.2s; }
         .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #f59e0b; }
-
-        .review-placeholder {
-            background: #f8fafc;
-            border: 2px dashed #e2e8f0;
-            border-radius: 3rem;
-        }
     </style>
 </head>
 <body>
 
 <div id="zoom-wrapper">
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-24 flex items-center justify-between px-10">
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-20 flex items-center justify-between px-6">
         <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
-            <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
+            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#7fb3e6] shadow-sm bg-white">
                 <img src="assets/images/logo.jpeg" class="w-full h-full object-cover">
             </div>
-            <span class="ml-4 font-black text-[#1d3557] italic tracking-tighter text-2xl uppercase">Team NOVA</span>
+            <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl uppercase">Team NOVA</span>
         </div>
-        <div class="hidden lg:flex space-x-12 text-[16px] font-bold uppercase tracking-[0.15em]">
+        
+        <!-- Desktop Nav -->
+        <div class="hidden lg:flex space-x-10 text-[16px] font-bold uppercase tracking-widest">
             <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6]">Home</button>
             <button onclick="navigateTo('events')" class="text-[#1d3557] hover:text-[#7fb3e6]">Events</button>
             <button onclick="navigateTo('reviews')" class="text-[#1d3557] hover:text-[#7fb3e6]">Write Review</button>
             <button onclick="navigateTo('contact')" class="text-[#7fb3e6]">Connect</button>
         </div>
+
+        <!-- Mobile Toggle -->
+        <button class="lg:hidden text-[#1d3557]" onclick="toggleMobileMenu()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col space-y-4 lg:hidden shadow-lg">
+            <button onclick="navigateTo('home')" class="text-left font-bold text-xs uppercase">Home</button>
+            <button onclick="navigateTo('events')" class="text-left font-bold text-xs uppercase">Events</button>
+            <button onclick="navigateTo('reviews')" class="text-left font-bold text-xs uppercase">Write Review</button>
+            <button onclick="navigateTo('contact')" class="text-left font-bold text-xs uppercase text-[#7fb3e6]">Connect</button>
+        </div>
     </nav>
 
-    <main id="app-content" class="pt-24 flex-grow"></main>
+    <main id="app-content" class="pt-20 min-h-screen"></main>
 
-    <!-- Fixed Footer with Contrast Background to prevent blending -->
-    <footer class="w-full py-20 bg-slate-100 border-t border-gray-200 text-center px-6">
-        <div class="max-w-4xl mx-auto">
-            <p class="text-gray-500 font-semibold text-lg leading-relaxed uppercase tracking-wider">
-                Need help? Contact us at 
-                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-extrabold hover:opacity-70 transition-opacity">@nova_.ngo</a> 
-                for queries, collaborations or donations. <br>
-                <span class="text-[#1d3557] font-black text-sm mt-6 block tracking-[0.3em]">THANK YOU.</span>
-            </p>
-        </div>
+    <!-- Unified Footer -->
+    <footer class="w-full py-16 bg-slate-100 border-t border-gray-200 text-center px-6">
+        <p class="text-gray-500 font-semibold text-lg">
+            Need help? Contact us at 
+            <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-bold underline">@nova_.ngo</a> 
+            for queries, collaborations or donations. <br>
+            <span class="text-[#1d3557] font-black uppercase tracking-widest text-sm mt-4 inline-block">Thank you.</span>
+        </p>
     </footer>
 </div>
 
@@ -104,11 +102,10 @@
                         <h1 class="text-6xl md:text-9xl font-extrabold mb-10 leading-[0.9] tracking-tighter uppercase">Small Acts, <br><span class="text-[#7fb3e6]">Big Smiles.</span></h1>
                         <p class="text-xl md:text-2xl text-blue-100 font-light max-w-3xl mx-auto leading-relaxed mb-12">Team Nova is a youth led NGO dedicated to spreading happiness through workshops and community action.</p>
                         <div class="flex justify-center gap-6">
-                            <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 transition-all">Past Events</button>
+                            <button onclick="navigateTo('events')" class="bg-white text-[#1d3557] px-10 py-4 rounded-full font-black text-xs uppercase tracking-widest shadow-xl hover:scale-105 transition-all">Past Events</button>
                         </div>
                     </div>
                 </section>
-
                 <section class="py-32 bg-slate-50 px-6">
                     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
                         <div class="order-2 md:order-1 text-left">
@@ -118,7 +115,6 @@
                         <div class="order-1 md:order-2 img-container aspect-square"><img src="assets/images/about2.jpeg"></div>
                     </div>
                 </section>
-
                 <section class="py-32 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
                     <div class="img-container aspect-square"><img src="assets/images/about.jpeg"></div>
                     <div class="text-left">
@@ -129,13 +125,11 @@
                         </div>
                     </div>
                 </section>
-
-                <!-- Reviews at the bottom of Home Page -->
-                <section class="py-32 px-6 max-w-7xl mx-auto">
-                    <h2 class="text-5xl font-black text-[#1d3557] mb-16 uppercase italic tracking-tighter text-center">Community Reviews</h2>
-                    <div class="review-placeholder p-20 text-center">
-                        <p class="text-gray-400 text-2xl font-light italic mb-8">No reviews yet. Be the first to tell us how we're doing!</p>
-                        <button onclick="navigateTo('reviews')" class="bg-[#1d3557] text-white px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all">Write Review</button>
+                <section class="py-24 px-6 max-w-7xl mx-auto">
+                    <h2 class="text-5xl font-black text-[#1d3557] mb-12 text-center italic uppercase">Community Reviews</h2>
+                    <div class="bg-slate-50 border-2 border-dashed border-gray-300 rounded-[3rem] p-16 text-center">
+                        <p class="text-gray-400 text-xl italic font-light">No reviews yet. Be the first to tell us how we're doing!</p>
+                        <button onclick="navigateTo('reviews')" class="mt-8 text-[#7fb3e6] font-bold uppercase tracking-widest text-xs hover:underline">Write Review →</button>
                     </div>
                 </section>
             `,
@@ -176,6 +170,7 @@
                             <div class="md:w-1/2 text-left">
                                 <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
                                 <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
+                                <p class="text-2xl text-blue-100/70 font-light italic">"Serving over 300 wholesome meals"</p>
                             </div>
                             <div class="md:w-1/2 flex flex-col gap-6 items-center">
                                 <div class="video-wrapper"><video controls><source src="assets/videos/food1.mp4"></video></div>
@@ -183,14 +178,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="max-w-6xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-12 text-center">
-                        <p>We served over 300 hot meals near Ballygunge Station in collaboration with the SLJF. It was a day of deep impact and full hearts.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="max-w-6xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-8">
+                        <p>Today was a truly impactful day as we brought "Roti on Wheels" to the busy streets near Ballygunge Station. We were able to serve over 300 people a wholesome, hot meal consisting of fresh rotis, nutritious sabji, tangy aachar, and a sweet treat of gulab jamun.</p>
+                        <p>This event was a collaboration between NGO Nova and the Santosh Lalita Jain Foundation (SLJF).</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
                             <div class="img-container aspect-[3/4]"><img src="assets/images/f1.jpeg"></div>
                             <div class="img-container aspect-[3/4]"><img src="assets/images/f2.jpeg"></div>
                             <div class="img-container aspect-[3/4]"><img src="assets/images/f3.jpeg"></div>
                         </div>
-                        <div class="slogan-font text-5xl text-[#7fb3e6]">Love, <br>nova.</div>
+                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
                     </div>
                 </div>
             `,
@@ -202,6 +198,7 @@
                             <div class="md:w-1/2 text-left">
                                 <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
                                 <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
+                                <p class="text-2xl text-blue-100/70 font-light italic">"For the kids who want to read but can not"</p>
                             </div>
                             <div class="md:w-1/2 flex flex-col gap-6 items-center">
                                 <div class="video-wrapper"><video controls><source src="assets/videos/bookdrive3.mp4"></video></div>
@@ -209,13 +206,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="max-w-4xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-12 text-center">
-                        <p>Our 3-day book drive collected hundreds of stories for children in need. Huge thanks to CINI for the partnership.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="max-w-4xl mx-auto py-24 px-6 text-xl text-gray-600 font-light leading-relaxed space-y-8">
+                        <p>There's something so special about books. Team Nova hosted our very first Book Drive, collecting donations from 29th September to 1st October 2025.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
                             <div class="img-container aspect-video"><img src="assets/images/b1.jpeg"></div>
                             <div class="img-container aspect-video"><img src="assets/images/b3.jpeg"></div>
                         </div>
-                        <div class="slogan-font text-5xl text-[#7fb3e6]">Love, <br>nova.</div>
+                        <div class="slogan-font text-5xl text-[#7fb3e6] text-center mt-12">Love, <br>nova.</div>
                     </div>
                 </div>
             `,
@@ -226,7 +223,8 @@
                         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
                             <div class="md:w-1/2 text-left">
                                 <button onclick="navigateTo('events')" class="text-white/70 font-black text-xs uppercase tracking-widest mb-12 flex items-center hover:-translate-x-2 transition-transform">← Back to Events</button>
-                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH</span></h1>
+                                <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
+                                <p class="text-2xl text-blue-100/70 font-light italic">Bringing smiles without barriers.</p>
                             </div>
                             <div class="md:w-1/2 flex justify-center">
                                 <div class="video-wrapper"><video controls><source src="assets/videos/pickle12.mp4"></video></div>
@@ -234,7 +232,7 @@
                         </div>
                     </div>
                     <div class="max-w-7xl mx-auto py-24 px-6 text-center space-y-12">
-                        <p class="text-gray-600 text-2xl font-light leading-relaxed max-w-3xl mx-auto">Our first fundraiser tournament was a smash hit!</p>
+                        <p class="text-gray-600 text-2xl font-light">Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives.</p>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div class="img-container aspect-[4/5]"><img src="assets/images/pickle8.jpeg"></div>
                             <div class="img-container aspect-[4/5]"><img src="assets/images/pickle9.jpeg"></div>
@@ -283,10 +281,16 @@
             `
         };
 
+        function toggleMobileMenu() { 
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden'); 
+        }
+
         function navigateTo(viewName) {
             const content = document.getElementById('app-content');
-            if (content) content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
+            content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('mobile-menu').classList.add('hidden');
 
             if(viewName === 'home') createStars('home-stars');
             if(viewName === 'events') createStars('events-stars');
@@ -299,7 +303,7 @@
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = '';
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 50; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 const size = (Math.random() * 2 + 1) + 'px';
