@@ -303,13 +303,30 @@
 
     function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
 
-    function navigateTo(viewName) {
+function navigateTo(viewName) {
         const content = document.getElementById('app-content');
         content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
         window.scrollTo({ top: 0, behavior: 'smooth' });
         document.getElementById('mobile-menu').classList.add('hidden');
 
-        if(viewName === 'home') createStars('home-stars');
+        if(viewName === 'home') {
+            createStars('home-stars');
+            
+            // --- ADDED: Confetti Effect ---
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#1d3557', '#7fb3e6', '#ffffff']
+            });
+
+            // --- ADDED: Welcome Pop-up ---
+            // Using setTimeout so it appears slightly after the page transition
+            setTimeout(() => {
+                alert("Welcome to NGO NOVA!\nHelp bring smiles without barriers");
+            }, 500);
+        }
+        
         if(viewName === 'events') createStars('events-stars');
         if(viewName === 'rotionwheels-detail') createStars('roti-stars');
         if(viewName === 'bookdrive-detail') createStars('book-stars');
