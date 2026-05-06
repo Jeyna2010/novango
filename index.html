@@ -21,11 +21,14 @@
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
         
-        .img-container { border-radius: 2.5rem; overflow: hidden; box-shadow: 0 15px 35px rgba(29, 53, 87, 0.15); background-color: #f8fafc; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+        .img-container { border-radius: 2.5rem; overflow: hidden; box-shadow: 0 15px 35px rgba(29, 53, 87, 0.15); background-color: #f8fafc; display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative; }
         .img-container img, .img-container video { width: 100%; height: 100%; display: block; object-fit: cover; }
         
-        .video-wrapper { max-width: 280px; width: 100%; margin: 0 auto; }
+        .video-wrapper { max-width: 280px; width: 100%; margin: 0 auto; position: relative; }
         video { border-radius: 1.5rem; width: 100%; height: auto; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: block; object-fit: contain; }
+
+        .mute-toggle { position: absolute; bottom: 15px; right: 15px; z-index: 10; background: rgba(29, 53, 87, 0.8); color: white; padding: 8px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; }
+        .mute-toggle:hover { transform: scale(1.1); background: #7fb3e6; }
         
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(29, 53, 87, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .view-transition { animation: fadeIn 0.6s ease-out forwards; }
@@ -54,7 +57,6 @@
 </head>
 <body>
 
-<!-- Custom Nova Modal -->
 <div id="nova-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-6">
     <div class="glass-card max-w-sm w-full p-10 rounded-[3rem] text-center shadow-2xl border-2 border-[#7fb3e6]/30">
         <h2 class="text-3xl font-black text-[#1d3557] mb-2 uppercase italic tracking-tighter">Welcome to</h2>
@@ -76,11 +78,25 @@
             </div>
             <span class="ml-3 font-black text-[#1d3557] italic tracking-tighter text-xl uppercase">Team NOVA</span>
         </div>
+        
         <div class="hidden lg:flex space-x-10 text-[16px] font-bold uppercase tracking-widest">
             <button onclick="navigateTo('home')" class="text-[#1d3557] hover:text-[#7fb3e6]">Home</button>
             <button onclick="navigateTo('events')" class="text-[#1d3557] hover:text-[#7fb3e6]">Events</button>
             <button onclick="navigateTo('reviews')" class="text-[#1d3557] hover:text-[#7fb3e6]">Write Review</button>
             <button onclick="navigateTo('contact')" class="text-[#7fb3e6]">Connect</button>
+        </div>
+
+        <button class="lg:hidden text-[#1d3557]" onclick="toggleMobileMenu()">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 p-8 flex flex-col space-y-6 lg:hidden shadow-2xl">
+            <button onclick="navigateTo('home')" class="text-left font-black text-sm uppercase tracking-widest">Home</button>
+            <button onclick="navigateTo('events')" class="text-left font-black text-sm uppercase tracking-widest">Events</button>
+            <button onclick="navigateTo('reviews')" class="text-left font-black text-sm uppercase tracking-widest">Write Review</button>
+            <button onclick="navigateTo('contact')" class="text-left font-black text-sm uppercase tracking-widest text-[#7fb3e6]">Connect</button>
         </div>
     </nav>
 
@@ -90,7 +106,7 @@
         <div class="max-w-4xl mx-auto">
             <p class="text-gray-500 font-semibold text-lg leading-relaxed">
                 Need help? Contact us at 
-                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-extrabold underline">@nova_.ngo</a>
+                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-extrabold underline">@nova_.ngo</a> 
                 for queries, collaborations or donations. <br>
                 <span class="text-[#1d3557] font-black uppercase tracking-widest text-sm mt-6 block">Thank you.</span>
             </p>
@@ -99,6 +115,15 @@
 </div>
 
 <script>
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+    function closeNovaModal() { document.getElementById('nova-modal').classList.add('hidden'); }
+    
+    function toggleMute(btn, videoId) {
+        const video = document.getElementById(videoId);
+        video.muted = !video.muted;
+        btn.innerHTML = video.muted ? '🔇' : '🔊';
+    }
+
     const views = {
         home: () => `
             <section class="starry-bg text-white py-28 md:py-48 px-6 text-center relative overflow-hidden view-transition">
@@ -121,7 +146,7 @@
                     <div class="order-1 md:order-2 img-container aspect-square"><img src="assets/images/about2.jpeg"></div>
                 </div>
             </section>
-            <section class="py-32 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <section class="py-32 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center border-b border-gray-100">
                 <div class="img-container aspect-square"><img src="assets/images/about.jpeg"></div>
                 <div class="text-left">
                     <h2 class="text-6xl font-black text-[#1d3557] mb-8 uppercase italic tracking-tighter">OUR AIM</h2>
@@ -131,22 +156,21 @@
                     </div>
                 </div>
             </section>
-            <section class="py-24 overflow-hidden bg-white">
-                <div class="max-w-7xl mx-auto px-6">
-                    <h2 class="text-4xl font-black text-[#1d3557] mb-16 text-center italic uppercase tracking-tighter">Community Voice</h2>
-                    <div class="flex flex-wrap justify-center gap-8">
-                        <div class="review-bubble" style="--delay: 0s">
-                            <span class="text-3xl mb-4 opacity-30">✨</span>
-                            <p class="text-gray-400 font-light italic">Waiting for your story...</p>
-                        </div>
-                        <div class="review-bubble" style="--delay: 1.5s">
-                            <span class="text-3xl mb-4 opacity-30">💙</span>
-                            <p class="text-gray-400 font-light italic">Be the first to review!</p>
-                        </div>
-                    </div>
-                    <div class="text-center mt-12">
-                         <button onclick="navigateTo('reviews')" class="bg-[#1d3557] text-white px-12 py-5 rounded-full text-xs font-black uppercase tracking-widest shadow-xl hover:bg-[#7fb3e6] transition-all">Write Review</button>
-                    </div>
+            <section class="py-32 px-6 bg-white text-center">
+                <h2 class="text-6xl font-black text-[#1d3557] mb-6 uppercase italic tracking-tighter">WHO ARE WE?</h2>
+                <p class="text-xl text-gray-500 mb-16 italic slogan-font">"We're 11 people because 10 just wasn't loud enough."</p>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-left">
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">1. Tanishka Baid</span><a href="https://instagram.com/tanishka.baid22" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@tanishka.baid22</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">2. Drishti Choraria</span><a href="https://instagram.com/drishti_choraria" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@drishti_choraria</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">3. Rheia Bhatter</span><a href="https://instagram.com/rheia.bhatter" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@rheia.bhatter</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">4. Jeyna Surana</span><a href="https://instagram.com/_jeynaa" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@_jeynaa</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">5. Yashvi Agarwal</span><a href="https://instagram.com/yashvi.agarwal02" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@yashvi.agarwal02</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">6. Khushi Mohta</span><a href="https://instagram.com/khush1mohta" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@khush1mohta</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">7. Vidhi Pandey</span><a href="https://instagram.com/vidhishree_01" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@vidhishree_01</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">8. Prarthna Saith</span><a href="https://instagram.com/prarthnasaith" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@prarthnasaith</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">9. Yashvie Anchalia</span><a href="https://instagram.com/yaaashvie" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@yaaashvie</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">10. Aayat Ajaz</span><a href="https://instagram.com/aayatt.03" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@aayatt.03</a></div>
+                    <div class="glass-card p-6 rounded-3xl flex justify-between items-center"><span class="font-bold">11. Hitika Gupta</span><a href="https://instagram.com/_hitika_05" target="_blank" class="text-[#7fb3e6] font-bold text-sm">@_hitika_05</a></div>
                 </div>
             </section>
         `,
@@ -158,7 +182,8 @@
             <div class="max-w-7xl mx-auto py-24 px-6 grid md:grid-cols-3 gap-8">
                 <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('rotionwheels-detail')">
                      <div class="h-64 relative overflow-hidden bg-slate-900 flex items-center justify-center">
-                        <video class="w-full h-full object-cover opacity-60" autoplay muted loop playsinline controls><source src="assets/videos/food1.mp4"></video>
+                        <video id="v-rotion" class="w-full h-full object-cover opacity-60" autoplay muted loop playsinline><source src="assets/videos/food1.mp4"></video>
+                        <button class="mute-toggle" onclick="event.stopPropagation(); toggleMute(this, 'v-rotion')">🔇</button>
                         <span class="absolute text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">Roti on Wheels</span>
                      </div>
                      <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Nutrition</h3></div>
@@ -189,8 +214,14 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
                         </div>
                         <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/food1.mp4"></video></div>
-                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/f4.mp4"></video></div>
+                            <div class="video-wrapper">
+                                <video id="v-food1" autoplay muted loop playsinline><source src="assets/videos/food1.mp4"></video>
+                                <button class="mute-toggle" onclick="toggleMute(this, 'v-food1')">🔇</button>
+                            </div>
+                            <div class="video-wrapper">
+                                <video id="v-f4" autoplay muted loop playsinline><source src="assets/videos/f4.mp4"></video>
+                                <button class="mute-toggle" onclick="toggleMute(this, 'v-f4')">🔇</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,8 +248,14 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
                         </div>
                         <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/bookdrive3.mp4"></video></div>
-                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/b2.mp4"></video></div>
+                            <div class="video-wrapper">
+                                <video id="v-bookdrive3" autoplay muted loop playsinline><source src="assets/videos/bookdrive3.mp4"></video>
+                                <button class="mute-toggle" onclick="toggleMute(this, 'v-bookdrive3')">🔇</button>
+                            </div>
+                            <div class="video-wrapper">
+                                <video id="v-b2" autoplay muted loop playsinline><source src="assets/videos/b2.mp4"></video>
+                                <button class="mute-toggle" onclick="toggleMute(this, 'v-b2')">🔇</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -244,7 +281,10 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
                         </div>
                         <div class="md:w-1/2 flex justify-center">
-                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/pickle12.mp4"></video></div>
+                            <div class="video-wrapper">
+                                <video id="v-pickle12" autoplay muted loop playsinline><source src="assets/videos/pickle12.mp4"></video>
+                                <button class="mute-toggle" onclick="toggleMute(this, 'v-pickle12')">🔇</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -255,14 +295,10 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle1.jpeg"></div>
-                        
-                        <!-- VIDEO: Fixed path and controls -->
-                        <div class="img-container aspect-[4/5]">
-                            <video autoplay muted loop playsinline controls class="w-full h-full object-cover">
-                                <source src="assets/videos/pickle2.mp4" type="video/mp4">
-                            </video>
+                        <div class="img-container aspect-[4/5] relative">
+                            <video id="v-pickle2" autoplay muted loop playsinline><source src="assets/videos/pickle2.mp4"></video>
+                            <button class="mute-toggle" onclick="toggleMute(this, 'v-pickle2')">🔇</button>
                         </div>
-                        
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle3.jpeg"></div>
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle8.jpeg"></div>
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle9.jpeg"></div>
@@ -275,7 +311,7 @@
         reviews: () => `
             <div class="max-w-4xl mx-auto py-24 px-6 view-transition text-center">
                 <h2 class="text-6xl font-black text-[#1d3557] mb-10 uppercase italic tracking-tighter">WRITE A REVIEW</h2>
-                <div class="glass-card p-10 rounded-[3rem] shadow-xl text-left">
+                <div class="glass-card p-10 rounded-[3rem] shadow-xl text-left mb-20">
                     <form onsubmit="event.preventDefault(); alert('Thank you for your review!'); navigateTo('home');">
                         <div class="flex justify-center mb-10">
                             <div class="star-rating">
@@ -295,10 +331,23 @@
                                 <label class="block text-sm font-bold mb-2">Comment</label>
                                 <textarea class="w-full p-4 rounded-2xl border border-gray-200 h-32 focus:outline-[#7fb3e6]" required placeholder="Share your experience..."></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-[#1d3557] text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all">Post Review</button>
+                            <button type="submit" class="w-full bg-[#1d3557] text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all shadow-lg">Post Review</button>
                         </div>
                     </form>
                 </div>
+                <section class="py-12 overflow-hidden bg-white">
+                    <h2 class="text-4xl font-black text-[#1d3557] mb-16 text-center italic uppercase tracking-tighter">Community Voice</h2>
+                    <div class="flex flex-wrap justify-center gap-8">
+                        <div class="review-bubble" style="--delay: 0s">
+                            <span class="text-3xl mb-4 opacity-30">✨</span>
+                            <p class="text-gray-400 font-light italic">Waiting for your story...</p>
+                        </div>
+                        <div class="review-bubble" style="--delay: 1.5s">
+                            <span class="text-3xl mb-4 opacity-30">💙</span>
+                            <p class="text-gray-400 font-light italic">Be the first to review!</p>
+                        </div>
+                    </div>
+                </section>
             </div>
         `,
         contact: () => `
@@ -315,11 +364,18 @@
 
     function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
     function closeNovaModal() { document.getElementById('nova-modal').classList.add('hidden'); }
+    
+    function toggleMute(btn, videoId) {
+        const video = document.getElementById(videoId);
+        video.muted = !video.muted;
+        btn.innerHTML = video.muted ? '🔇' : '🔊';
+    }
 
     function navigateTo(viewName) {
         const content = document.getElementById('app-content');
         content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.getElementById('mobile-menu').classList.add('hidden');
 
         if(viewName === 'home') {
             createStars('home-stars');
