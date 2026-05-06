@@ -220,7 +220,7 @@
                 </div>
             </div>
         `,
-        'pickleball-detail': () => `
+       'pickleball-detail': () => `
             <div class="view-transition pb-24">
                 <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
                     <div id="pickle-stars"></div>
@@ -236,12 +236,19 @@
                 </div>
                 <div class="max-w-7xl mx-auto py-24 px-6 text-center text-xl text-gray-600 font-light leading-relaxed space-y-12">
                     <div class="max-w-4xl mx-auto space-y-8">
-                        <p>Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers.</p>
+                        <p>nova_.ngo ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers.</p>
                         <p>The winners walked away with 10k and an amazing experience. Each match was a war of talent, entertaining and nerve wracking to watch! This wouldn't have been possible without you so thank you and more coming soon!</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle1.jpeg"></div>
-                        <div class="img-container aspect-[4/5]"><img src="assets/images/pickle2.jpeg"></div>
+                        
+                        <!-- VIDEO FIX: This handles the pickle2.mp4 file correctly -->
+                        <div class="img-container aspect-[4/5]">
+                            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                                <source src="assets/images/pickle2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle3.jpeg"></div>
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle8.jpeg"></div>
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle9.jpeg"></div>
