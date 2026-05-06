@@ -9,39 +9,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Plus+Jakarta+Sans:wght@700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --nova-navy: #1d3557; --nova-sky: #7fb3e6; --nova-white: #ffffff; }
+        
         @media (min-width: 1024px) {
             #zoom-wrapper { transform: scale(0.85); transform-origin: top center; width: 117.65%; margin-left: -8.825%; }
         }
+
         body { font-family: 'Inter', sans-serif; background-color: var(--nova-white); color: var(--nova-navy); overflow-x: hidden; scroll-behavior: smooth; }
         h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
         .slogan-font { font-family: 'Caveat', cursive; }
         .starry-bg { background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
-        .img-container { border-radius: 2.5rem; overflow: hidden; box-shadow: 0 15px 35px rgba(29, 53, 87, 0.15); background-color: #000; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
-        .img-container img { width: 100%; height: 100%; display: block; object-fit: cover; }
+        
+        .img-container { border-radius: 2.5rem; overflow: hidden; box-shadow: 0 15px 35px rgba(29, 53, 87, 0.15); background-color: #f8fafc; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+        .img-container img, .img-container video { width: 100%; height: 100%; display: block; object-fit: cover; }
+        
         .video-wrapper { max-width: 280px; width: 100%; margin: 0 auto; }
         video { border-radius: 1.5rem; width: 100%; height: auto; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: block; object-fit: contain; }
+        
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(29, 53, 87, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .view-transition { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
         .star-rating { direction: rtl; display: inline-flex; gap: 5px; }
         .star-rating input { display: none; }
         .star-rating label { color: #ccc; cursor: pointer; font-size: 40px; transition: 0.2s; }
         .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #f59e0b; }
-        .review-bubble { min-width: 280px; padding: 2.5rem; border-radius: 3rem; background: white; border: 2px dashed #e2e8f0; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: float 6s infinite ease-in-out; animation-delay: var(--delay); }
+
+        .review-bubble { 
+            min-width: 280px; 
+            padding: 2.5rem; 
+            border-radius: 3rem; 
+            background: white; 
+            border: 2px dashed #e2e8f0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            animation: float 6s infinite ease-in-out;
+            animation-delay: var(--delay);
+        }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
     </style>
 </head>
 <body>
 
-<!-- Custom Modal Overlay -->
+<!-- Custom Nova Modal -->
 <div id="nova-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-6">
     <div class="glass-card max-w-sm w-full p-10 rounded-[3rem] text-center shadow-2xl border-2 border-[#7fb3e6]/30">
         <h2 class="text-3xl font-black text-[#1d3557] mb-2 uppercase italic tracking-tighter">Welcome to</h2>
         <h2 class="text-5xl font-black text-[#7fb3e6] mb-6 uppercase italic tracking-tighter">NGO NOVA</h2>
-        <p class="slogan-font text-4xl text-[#1d3557] leading-tight mb-8">Help bring smiles <br> without barriers</p>
-        <button onclick="closeNovaModal()" class="w-full bg-[#1d3557] text-white py-4 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all shadow-lg">Let's Go!</button>
+        <p class="slogan-font text-4xl text-[#1d3557] leading-tight mb-8">
+            Help bring smiles <br> without barriers
+        </p>
+        <button onclick="closeNovaModal()" class="w-full bg-[#1d3557] text-white py-4 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all shadow-lg">
+            Let's Go!
+        </button>
     </div>
 </div>
 
@@ -144,7 +167,7 @@
             <div class="max-w-7xl mx-auto py-24 px-6 grid md:grid-cols-3 gap-8">
                 <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('rotionwheels-detail')">
                      <div class="h-64 relative overflow-hidden bg-slate-900 flex items-center justify-center">
-                        <video class="w-full h-full object-cover opacity-60" muted loop playsinline onmouseover="this.play()"><source src="assets/videos/food1.mp4"></video>
+                        <video class="w-full h-full object-cover opacity-60" autoplay muted loop playsinline><source src="assets/videos/food1.mp4"></video>
                         <span class="absolute text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">Roti on Wheels</span>
                      </div>
                      <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Nutrition</h3></div>
@@ -175,8 +198,8 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
                         </div>
                         <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                            <div class="video-wrapper"><video controls><source src="assets/videos/food1.mp4"></video></div>
-                            <div class="video-wrapper"><video controls><source src="assets/videos/f4.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/food1.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/f4.mp4"></video></div>
                         </div>
                     </div>
                 </div>
@@ -203,8 +226,8 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
                         </div>
                         <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                            <div class="video-wrapper"><video controls><source src="assets/videos/bookdrive3.mp4"></video></div>
-                            <div class="video-wrapper"><video controls><source src="assets/videos/b2.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/bookdrive3.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/b2.mp4"></video></div>
                         </div>
                     </div>
                 </div>
@@ -220,7 +243,7 @@
                 </div>
             </div>
         `,
-       'pickleball-detail': () => `
+        'pickleball-detail': () => `
             <div class="view-transition pb-24">
                 <div class="starry-bg py-24 md:py-32 px-6 text-white relative overflow-hidden">
                     <div id="pickle-stars"></div>
@@ -230,19 +253,19 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
                         </div>
                         <div class="md:w-1/2 flex justify-center">
-                            <div class="video-wrapper"><video controls><source src="assets/videos/pickle12.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/pickle12.mp4"></video></div>
                         </div>
                     </div>
                 </div>
                 <div class="max-w-7xl mx-auto py-24 px-6 text-center text-xl text-gray-600 font-light leading-relaxed space-y-12">
                     <div class="max-w-4xl mx-auto space-y-8">
-                        <p>Ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers.</p>
+                        <p>nova_.ngo ngo nova had its first fundraiser! A pickleball smash hit fundraiser with all proceeds going to funding our future drives, bringing a smile to faces without any barriers.</p>
                         <p>The winners walked away with 10k and an amazing experience. Each match was a war of talent, entertaining and nerve wracking to watch! This wouldn't have been possible without you so thank you and more coming soon!</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle1.jpeg"></div>
                         
-                       
+                        <!-- VIDEO FIX: Correct path to assets/videos/ -->
                         <div class="img-container aspect-[4/5]">
                             <video autoplay muted loop playsinline class="w-full h-full object-cover">
                                 <source src="assets/videos/pickle2.mp4" type="video/mp4">
@@ -273,8 +296,14 @@
                             </div>
                         </div>
                         <div class="space-y-6">
-                            <div><label class="block text-sm font-bold mb-2">Display Name</label><input type="text" placeholder="Your Name" class="w-full p-4 rounded-2xl border border-gray-200"></div>
-                            <div><label class="block text-sm font-bold mb-2">Comment</label><textarea class="w-full p-4 rounded-2xl border border-gray-200 h-32" required placeholder="Share your experience..."></textarea></div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2">Display Name</label>
+                                <input type="text" placeholder="Your Name" class="w-full p-4 rounded-2xl border border-gray-200 focus:outline-[#7fb3e6]">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2">Comment</label>
+                                <textarea class="w-full p-4 rounded-2xl border border-gray-200 h-32 focus:outline-[#7fb3e6]" required placeholder="Share your experience..."></textarea>
+                            </div>
                             <button type="submit" class="w-full bg-[#1d3557] text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all">Post Review</button>
                         </div>
                     </form>
@@ -285,7 +314,9 @@
             <div class="max-w-3xl mx-auto py-32 text-center px-6 view-transition">
                 <h2 class="text-6xl font-black text-[#1d3557] mb-6 uppercase italic tracking-tighter">CONNECT</h2>
                 <p class="text-xl font-bold mb-10 text-[#1d3557]">teamnova.kolkata@gmail.com</p>
-                <div class="max-w-[320px] mx-auto mb-12 border-8 border-white rounded-[2rem] shadow-lg overflow-hidden"><img src="assets/images/about3.jpeg" class="w-full"></div>
+                <div class="max-w-[320px] mx-auto mb-12 border-8 border-white rounded-[2rem] shadow-lg overflow-hidden">
+                    <img src="assets/images/about3.jpeg" class="w-full">
+                </div>
                 <a href="https://ig.me/m/nova_.ngo" target="_blank" class="bg-[#1d3557] text-white px-16 py-5 rounded-full font-black uppercase shadow-xl hover:scale-105 transition-all">MESSAGE US ON INSTAGRAM</a>
             </div>
         `
@@ -302,12 +333,15 @@
 
         if(viewName === 'home') {
             createStars('home-stars');
-            // ONLY trigger pop-up + confetti if this is the initial load (session based)
+            // Trigger pop-up + confetti ONLY on the very first load
             if (!sessionStorage.getItem('visited')) {
                 document.getElementById('nova-modal').classList.remove('hidden');
                 confetti({
-                    particleCount: 150, spread: 70, origin: { y: 0.6 },
-                    colors: ['#1d3557', '#7fb3e6', '#ffffff'], zIndex: 200
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#1d3557', '#7fb3e6', '#ffffff'],
+                    zIndex: 200
                 });
                 sessionStorage.setItem('visited', 'true');
             }
@@ -332,6 +366,7 @@
             container.appendChild(star);
         }
     }
+
     window.onload = () => navigateTo('home');
 </script>
 </body>
