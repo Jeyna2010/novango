@@ -54,6 +54,20 @@
 </head>
 <body>
 
+<!-- Custom Nova Modal -->
+<div id="nova-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-6">
+    <div class="glass-card max-w-sm w-full p-10 rounded-[3rem] text-center shadow-2xl border-2 border-[#7fb3e6]/30">
+        <h2 class="text-3xl font-black text-[#1d3557] mb-2 uppercase italic tracking-tighter">Welcome to</h2>
+        <h2 class="text-5xl font-black text-[#7fb3e6] mb-6 uppercase italic tracking-tighter">NGO NOVA</h2>
+        <p class="slogan-font text-4xl text-[#1d3557] leading-tight mb-8">
+            Help bring smiles <br> without barriers
+        </p>
+        <button onclick="closeNovaModal()" class="w-full bg-[#1d3557] text-white py-4 rounded-full font-black uppercase tracking-widest hover:bg-[#7fb3e6] transition-all shadow-lg">
+            Let's Go!
+        </button>
+    </div>
+</div>
+
 <div id="zoom-wrapper">
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-20 flex items-center justify-between px-6">
         <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
@@ -303,7 +317,11 @@
 
     function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
 
-function navigateTo(viewName) {
+    function closeNovaModal() {
+        document.getElementById('nova-modal').classList.add('hidden');
+    }
+
+    function navigateTo(viewName) {
         const content = document.getElementById('app-content');
         content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -312,19 +330,17 @@ function navigateTo(viewName) {
         if(viewName === 'home') {
             createStars('home-stars');
             
-            // --- ADDED: Confetti Effect ---
+            // Show custom modal
+            document.getElementById('nova-modal').classList.remove('hidden');
+
+            // Trigger confetti with high zIndex so it is in front of the modal
             confetti({
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#1d3557', '#7fb3e6', '#ffffff']
+                colors: ['#1d3557', '#7fb3e6', '#ffffff'],
+                zIndex: 200
             });
-
-            // --- ADDED: Welcome Pop-up ---
-            // Using setTimeout so it appears slightly after the page transition
-            setTimeout(() => {
-                alert("Welcome to NGO NOVA!\nHelp bring smiles without barriers");
-            }, 500);
         }
         
         if(viewName === 'events') createStars('events-stars');
