@@ -82,15 +82,6 @@
             <button onclick="navigateTo('reviews')" class="text-[#1d3557] hover:text-[#7fb3e6]">Write Review</button>
             <button onclick="navigateTo('contact')" class="text-[#7fb3e6]">Connect</button>
         </div>
-        <button class="lg:hidden text-[#1d3557]" onclick="toggleMobileMenu()">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-        </button>
-        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col space-y-4 lg:hidden shadow-lg">
-            <button onclick="navigateTo('home')" class="text-left font-bold text-xs uppercase">Home</button>
-            <button onclick="navigateTo('events')" class="text-left font-bold text-xs uppercase">Events</button>
-            <button onclick="navigateTo('reviews')" class="text-left font-bold text-xs uppercase">Write Review</button>
-            <button onclick="navigateTo('contact')" class="text-left font-bold text-xs uppercase text-[#7fb3e6]">Connect</button>
-        </div>
     </nav>
 
     <main id="app-content" class="pt-20 min-h-screen"></main>
@@ -99,7 +90,7 @@
         <div class="max-w-4xl mx-auto">
             <p class="text-gray-500 font-semibold text-lg leading-relaxed">
                 Need help? Contact us at 
-                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-extrabold underline">@nova_.ngo</a> 
+                <a href="https://ig.me/m/nova_.ngo" target="_blank" class="text-[#7fb3e6] font-extrabold underline">@nova_.ngo</a>
                 for queries, collaborations or donations. <br>
                 <span class="text-[#1d3557] font-black uppercase tracking-widest text-sm mt-6 block">Thank you.</span>
             </p>
@@ -167,7 +158,7 @@
             <div class="max-w-7xl mx-auto py-24 px-6 grid md:grid-cols-3 gap-8">
                 <div class="glass-card rounded-[3rem] overflow-hidden cursor-pointer" onclick="navigateTo('rotionwheels-detail')">
                      <div class="h-64 relative overflow-hidden bg-slate-900 flex items-center justify-center">
-                        <video class="w-full h-full object-cover opacity-60" autoplay muted loop playsinline><source src="assets/videos/food1.mp4"></video>
+                        <video class="w-full h-full object-cover opacity-60" autoplay muted loop playsinline controls><source src="assets/videos/food1.mp4"></video>
                         <span class="absolute text-white text-xs font-bold uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full">Roti on Wheels</span>
                      </div>
                      <div class="p-8 text-center"><h3 class="text-2xl font-black text-[#1d3557] uppercase">Nutrition</h3></div>
@@ -198,8 +189,8 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none">ROTI ON <br><span class="text-[#7fb3e6]">WHEELS</span></h1>
                         </div>
                         <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/food1.mp4"></video></div>
-                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/f4.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/food1.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/f4.mp4"></video></div>
                         </div>
                     </div>
                 </div>
@@ -226,8 +217,8 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter uppercase">Book <br><span class="text-[#7fb3e6]">Drive</span></h1>
                         </div>
                         <div class="md:w-1/2 flex flex-col gap-6 items-center">
-                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/bookdrive3.mp4"></video></div>
-                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/b2.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/bookdrive3.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/b2.mp4"></video></div>
                         </div>
                     </div>
                 </div>
@@ -253,7 +244,7 @@
                             <h1 class="text-6xl md:text-8xl font-black mb-8 italic uppercase tracking-tighter">PICKLEBALL <br><span class="text-[#7fb3e6]">SMASH HIT</span></h1>
                         </div>
                         <div class="md:w-1/2 flex justify-center">
-                            <div class="video-wrapper"><video autoplay muted loop playsinline><source src="assets/videos/pickle12.mp4"></video></div>
+                            <div class="video-wrapper"><video autoplay muted loop playsinline controls><source src="assets/videos/pickle12.mp4"></video></div>
                         </div>
                     </div>
                 </div>
@@ -265,9 +256,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div class="img-container aspect-[4/5]"><img src="assets/images/pickle1.jpeg"></div>
                         
-                        <!-- VIDEO FIX: Correct path to assets/videos/ -->
+                        <!-- VIDEO: Fixed path and controls -->
                         <div class="img-container aspect-[4/5]">
-                            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                            <video autoplay muted loop playsinline controls class="w-full h-full object-cover">
                                 <source src="assets/videos/pickle2.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -329,11 +320,9 @@
         const content = document.getElementById('app-content');
         content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        document.getElementById('mobile-menu').classList.add('hidden');
 
         if(viewName === 'home') {
             createStars('home-stars');
-            // Trigger pop-up + confetti ONLY on the very first load
             if (!sessionStorage.getItem('visited')) {
                 document.getElementById('nova-modal').classList.remove('hidden');
                 confetti({
