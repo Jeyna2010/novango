@@ -376,6 +376,10 @@
         content.innerHTML = views[viewName] ? views[viewName]() : views['home']();
         window.scrollTo({ top: 0, behavior: 'smooth' });
         document.getElementById('mobile-menu').classList.add('hidden');
+        if (window.va) {
+        window.va('event', { name: 'page_view', data: { page: viewName } });
+    }
+}
 
         if(viewName === 'home') {
             createStars('home-stars');
@@ -414,5 +418,6 @@
 
     window.onload = () => navigateTo('home');
 </script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
